@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>My App</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" type="text/css" href="css/framework7-icons.css"/>
+	<link rel="stylesheet" type="text/css" href="css/material-icons.css"/>
+  
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="views">
+        <div class="view view-main">
+            <div data-page="index" class="page navbar-fixed" >
+                    <!-- navbar here -->
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left" style="text-align: center;">
+                            <div style="width: 50px; height: 30px;" id="back-sp">      
+                                <i class="material-icons color-icon size-icon-30"  style=" margin: 0px 5px 0 10px;">arrow_back</i> 
+                            </div>
+                            <span style="font-size: 15px; text-transform: none;"> Quản lý người dùng</span>   
+                        </div>
+                        <div class="right" style="text-align: center;">
+                           <div style="width: 50px; height: 30px;" id='search'> 
+                            <i class="material-icons color-icon size-icon-30 open-about"  style=" margin: 0px 20px 0 10px;">search</i>
+
+                            </div>
+                        </div>   <!-- navbar-inner -->
+                    </div> 
+                </div>
+                <div class="page-content">                 
+                    <!-- content -->
+                    <div id="views" class="list-block" style="margin-top: 5px">
+                        <ul id="danhsach-nguoidung">
+                           <!--  <li class="item-content ">
+                                <div class="item-inner nguoidung-info" id="1">
+                                    <div class="right"><i class="material-icons " style="color:#884dff;  font-size: 50px">person</i></div>
+                                     <div class="center" style="text-align: center; color: #666666;">
+                                        <span>Nguyễn Văn A</span>
+                                        <br>
+                                        <span>NguyenA</span>
+                                     </div>
+                                    <div class="right trangthai-nguoidung" style="color:#884dff;">
+                                        <span>Bình thường</span>
+                                    </div>
+                                </div>
+                              
+                            </li> -->
+                           <!--  <li class='item-content '><div class='item-inner nguoidung-info' id='1'><div class='right'><i <div class='center' style='text-align: center; color: #666666;'><span>Nguyễn Văn A</span><br><span>NguyenA</span></div><div class='right trangthai-nguoidung' style='color:#884dff;'><span>Bình thường</span></div></div></li> -->
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="popup popup-thongtinnguoidung">
+        <div class="panel-overlay"></div>
+        <!-- right panel here -->
+        <div class="panel panel-right panel-cover panel-thongtinsp panel-chitietsp" id="b">
+           
+            <div class="list-block ">
+                <ul>
+                    <li class="item-content" style="" id="Luunguoidung">
+                           <span> Lưu người dùng</span>      
+                    </li>
+                     <li class="item-content " id="Xoanguoidung">           
+                           <span>Xóa người dung</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="view ">
+            <div class="page">
+                <div class="page-content ">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left" style="text-align: center;">
+                                <div style="width: 50px; height: 30px;" id="back-thongtinnguoidung">      
+                                    <i class="material-icons color-icon size-icon-30"  style=" margin: 0px 5px 0 10px;">arrow_back</i> 
+                                </div>
+                                <span style="font-size: 15px;"> Thông tin người dùng</span>   
+                            </div>
+                            <div class="right" style="text-align: center;">
+                               <div style="width: 50px; height: 30px;" id='menu-chucnang-quanlynguoidung'> 
+                                <i class="material-icons color-icon size-icon-30 open-about"  style=" margin: 0px 20px 0 10px;">more_vert</i>
+
+                                </div>
+                            </div>  
+                        </div> 
+                    </div>
+                     <div class="page-content  chitietsp-content">
+                        <form enctype="multipart/form-data">
+                            <div class="list-block" style="margin-top: 5px;">
+                                    <li class="item-content div-error" id="thongtinnguoidung-error" style="padding-top: 0px; display: block; padding-right: 0px; text-align: left; "></li>
+                                   <li class="item-content">
+                                    <div class="item-inner">
+                                      <div class="item-title label login-title"><i class="material-icons color-icon-panel">receipt</i></div>
+                                      <div class="item-input">
+                                        <input type="text" name="ho" id="input-ho"  placeholder="Họ"/>
+                                      </div>
+                                    </div>
+                                      <div class="item-inner">
+                                      <div class="item-title label login-title"><i class="material-icons color-icon-panel">receipt</i></div>
+                                      <div class="item-input">
+                                        <input type="text" name="ten" id="input-ten"  placeholder="Tên"/>
+                                      </div>
+                                    </div>
+                                </li>
+                               
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                      <div class="item-title label login-title"><i class="material-icons color-icon-panel">today</i></div>
+                                      <div class="item-input">
+                                        <input type="text" id="input-ngaysinh" name="ngaysinh" value="" placeholder="Ngày sinh" />
+                                      </div>
+                                    </div>
+                                </li>
+                                <li class="item-content" >
+                                    <div class="item-inner" >
+                                      <div class="item-title label login-title"><i class="material-icons color-icon-panel">location_on</i></div>
+                                      <div class="item-input">
+                                       <input type="text" name="diachi" id="input-diachi" value="" placeholder="Địa chỉ"/>
+                                      </div>
+                                    </div>
+                                </li>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                      <div class="item-title label login-title"><i class="material-icons color-icon-panel">phone</i></div>
+                                      <div class="item-input">
+                                        <input type="text" name="sodt" id="input-sodt" value="" placeholder="Số điện thoại"/>
+                                      </div>
+                                    </div>
+                                </li>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                      <div class="item-title label login-title"><i class="material-icons color-icon-panel">email</i></div>
+                                      <div class="item-input">
+                                        <input type="text" name="email" id="input-email" value="" placeholder="Email"/>
+                                      </div>
+                                    </div>
+                                </li>
+                               
+                                <li class="item-content">
+                                     <div class="item-inner">
+                                        <label >
+                                           Trạng thái người dùng
+                                        </label>
+                                        <div class="item-title label nguoidung-check"></div>
+                                        <label class="label-switch nguoidung-check">
+                                          <input type="checkbox" id="check-trangthainguoidung">
+                                          <div class="checkbox"></div>
+                                        </label>
+                                    </div>
+                                    </li>
+                              
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="popup popup-search">
+        <div class="views">
+            <div class="view view-main">
+                <div data-page="index"  class="page  navbar-fixed" >
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left" id="search-back">
+                               <a ><i class="material-icons color-icon size-icon-30"   style="margin: 5px 0px 0 10px;">arrow_back</i></a>
+                            </div>
+                            <form class="searchbar searchbar-init" id="form-search">
+                                <div class="searchbar-input">
+                                    <input type="search" placeholder="Search" id="input-search">
+                                    <a href="#" class="searchbar-clear"></a>
+                                </div>
+                            </form>
+                            <div class="searchbar-overlay"></div>                              
+                        </div>
+                    </div>
+
+                    <div class="page-content" id="content">
+                        <!-- search bar content here -->
+                        <div class="content-block searchbar-not-found">
+                            <div class="content-block-inner">
+                                Không có Người dùng phù hợp
+                            </div>
+                        </div>
+                        <div class="list-block list-block-search searchbar-found">
+                            <ul id="list-search">
+                               <!--  <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+
+                                            Item1
+                                        
+                                           
+                                         </div>    
+                                          <div class="item-after item-title">sssss</dib>   
+                                           </div>
+                                 
+                                    </div>
+                                </li>
+
+                                 <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            Item2
+                                        </div>                                    
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script>
+     var idnguoidung;
+     var calendarDefault = myApp.calendar({
+         input: '#input-ngaysinh',
+
+    });
+    //load dữ liệu trang quanly_nguoidung
+        $$("#thongtinnguoidung-error").hide();
+        var dataString;
+
+        $.ajax({
+            data: dataString,
+            url: host+"quanly/json_nguoidung.php",
+            type:'post',
+            dataType:'json',
+            success: function(result)
+            {    
+                if(result!="")
+                {  
+                    $.each(result,function(key,field){
+                        
+                        var idnguoidung = field.idnguoidung;
+                        
+                        var ten = field.ten;
+                        var ho = field.holot;
+                        var diachi = field.diachi;
+                        var ngaysinh = field.ngaysinh;
+                        var sodt = field.sodt;
+                        var email = field.email;
+                        var taikhoan = field.taikhoan;
+                        var trangthainguoidung = field.trangthainguoidung; // lấy trang thái sp dạng 0-1-2
+                        var trangthai_nguoidung ; // đổi thanh true hoac false
+                        if(trangthainguoidung == '0') // nếu sản phẩm bình thường
+                        {
+                            trangthai_nguoidung="Bình thường";
+                        }
+                        else //if hết hàng
+                        {
+                            trangthai_nguoidung="Khóa";
+                        }
+                        $$("#danhsach-nguoidung").append(" <li class='item-content nguoidung-info' id='"+idnguoidung+"'><div class='item-inner' ><div class='left'><i class='material-icons' style='color:#884dff;  font-size: 50px'>person</i></div> <div class='center' style='text-align: left; width:50%; color: #666666;'><span>"+ho+" "+ten+"</span><br><span>"+taikhoan+"</span></div><div class='right trangthai-nguoidung' style='width:30%;  color:#884dff;'><span>"+trangthai_nguoidung+"</span></div></div></li>");
+                        //add vào list search
+                          $("#list-search").append("<li  class='item-content search-item' id='listsearch-"+idnguoidung+"'><div class='item-inner'><div class='item-title'>"+ho+" "+ten+"<div class='item-after item-title'>"+trangthai_nguoidung+"</div></div></div></li>");
+                          $("#list-search").hide();
+                        
+
+                    });
+                }
+            }
+        });
+    //load dữ liệu
+        $$("#menu-chucnang-quanlynguoidung").on("click",function(){
+             myApp.openPanel('right');
+        });
+        $$('#search').on('click' , function(){
+            myApp.popup('.popup-search');
+        });
+          $$('#search-back').on('click' , function(){
+            myApp.closeModal();
+        });
+        var mySearchbar = myApp.searchbar('.searchbar', {
+            searchList: '.list-block-search',
+            searchIn: '.item-title',
+            onSearch : function()
+            {
+                if($("#input-search").val()!=""){
+                    $("#list-search").show();
+                }
+                else{
+                    $("#list-search").hide();
+                }
+            }
+        }); 
+
+         $(document).on('click' , ".nguoidung-info",function(e){
+            idnguoidung = $(this).prop("id");
+            var dataString = "idnguoidung="+idnguoidung;
+            $.ajax({
+                data: dataString,
+                url: host+"quanly/json_nguoidung_1.php",
+                type:'post',
+                dataType:'json',
+                success: function(result)
+                {    
+                    if(result!="")
+                    {  
+                        $.each(result,function(key,field){
+                            
+                            
+                            
+                            var ten = field.ten;
+                            var ho = field.holot;
+                            var diachi = field.diachi;
+                            var ngaysinh = field.ngaysinh;
+                            var sodt = field.sodt;
+                            var email = field.email;
+                            var trangthainguoidung = field.trangthainguoidung; // lấy trang thái sp dạng 0-1-2
+                            var trangthai_nguoidung ; // đổi thanh true hoac false
+                            if(trangthainguoidung == '0') // nếu sản phẩm bình thường
+                            {
+                                trangthai_nguoidung="checked";
+                            }
+                            else //if hết hàng
+                            {
+                                trangthai_nguoidung="";
+                            }
+                            
+                            $("#input-ho").val(ho);
+                            $("#input-ten").val(ten);
+                            $("#input-diachi").val(diachi);
+                            $("#input-ngaysinh").val(ngaysinh);
+                            $("#input-diachi").val(diachi);
+                            $("#input-sodt").val(sodt);
+                            $("#input-email").val(email);
+                            $("#check-trangthainguoidung").prop("checked",trangthai_nguoidung);
+                        });
+                    }
+                }
+            });
+            myApp.popup('.popup-thongtinnguoidung');
+        });
+        $('#back-thongtinnguoidung').on('click' , function(){
+            myApp.closeModal();
+        });
+
+        // click vào kết quả tìm kiếm
+        $(document).on("click", ".search-item",function(){
+             idnguoidung = $(this).prop("id");
+            idnguoidung = idnguoidung.substr(11);
+             var dataString = "idnguoidung="+idnguoidung;
+            $.ajax({
+                data: dataString,
+                url: host+"quanly/json_nguoidung_1.php",
+                type:'post',
+                dataType:'json',
+                success: function(result)
+                {    
+                    if(result!="")
+                    {  
+                        $.each(result,function(key,field){
+                            
+                            
+                            
+                            var ten = field.ten;
+                            var ho = field.holot;
+                            var diachi = field.diachi;
+                            var ngaysinh = field.ngaysinh;
+                            var sodt = field.sodt;
+                            var email = field.email;
+                            var trangthainguoidung = field.trangthainguoidung; // lấy trang thái sp dạng 0-1-2
+                            var trangthai_nguoidung ; // đổi thanh true hoac false
+                            if(trangthainguoidung == '0') // nếu sản phẩm bình thường
+                            {
+                                trangthai_nguoidung="checked";
+                            }
+                            else //if hết hàng
+                            {
+                                trangthai_nguoidung="";
+                            }
+                            
+                            $("#input-ho").val(ho);
+                            $("#input-ten").val(ten);
+                            $("#input-diachi").val(diachi);
+                            $("#input-ngaysinh").val(ngaysinh);
+                            $("#input-diachi").val(diachi);
+                            $("#input-sodt").val(sodt);
+                            $("#input-email").val(email);
+                            $("#check-trangthainguoidung").prop("checked",trangthai_nguoidung);
+                        });
+                    }
+                }
+            });
+            myApp.closeModal();
+            myApp.popup('.popup-thongtinnguoidung');
+               
+              
+         });
+         $("#input-sodt").on("focus",function(){
+              
+               $(this).attr('type', 'number');
+
+        });
+         $("#input-sodt").on("blur",function(){
+              
+               $(this).attr('type', 'text');
+
+        });
+
+        $("#Luunguoidung").on("click", function(){
+            
+            var ho= $("#input-ho").val();
+            var ten =  $("#input-ten").val();
+            var diachi = $("#input-diachi").val();
+            var ngaysinh = $("#input-ngaysinh").val();
+            var sodt = $("#input-sodt").val();
+            var email = $("#input-email").val();
+            var trangthai_nguoidung;
+            var trangthainguoidung_temp = $("#check-trangthainguoidung").is(':checked');
+            if(trangthainguoidung_temp==true)
+            {
+                trangthai_nguoidung = "0";
+            }
+            else
+            {
+                trangthai_nguoidung = "1";
+            }
+            if(ho.length <= 0 || ten.length <= 0 || ngaysinh.length <=0 || diachi.length <=0 || sodt.length <= 0 || email.length <= 0 )
+            {
+
+               $$("#thongtinnguoidung-error").show();
+               $$("#thongtinnguoidung-error").html("*Nhập đầy đủ dữ liệu!");
+            }
+            else
+            {
+                if(checkHoten(ho)==false || checkHoten==false)
+                {
+                   
+                    $$("#thongtinnguoidung-error").show();
+                   $$("#thongtinnguoidung-error").html("*Họ tên không được có kí tự đặc biệt hoặc số !");
+                }
+                else
+                {
+                    if(ho.length > 50 || ten.length > 10)
+                    {
+                       $$("#thongtinnguoidung-error").show();
+                       $$("#thongtinnguoidung-error").html("*Họ phải nhỏ hơn 50 kí tự và tên phải nhỏ hơn 10 ksi tự !");
+                    }
+                    else
+                    {
+                        if(sodt.length< 9 || sodt.length > 11 )
+                        {
+                           $$("#thongtinnguoidung-error").show();
+                           $$("#thongtinnguoidung-error").html("*Số điện thoại phải từ 9 - 11 số !");
+                        }
+                        else
+                        {
+                             if(checkEmail(email)==false)
+                                {
+                                    $$("#thongtinnguoidung-error").show();
+                                    $$("#thongtinnguoidung-error").html("*Email không hợp lệ!");
+                                }
+                                else
+                                {
+                                      $$("#thongtinnguoidung-error").hide();
+                                        var dataString = "idnguoidung="+idnguoidung+"&ho="+ho+"&ten="+ten+"&diachi="+diachi+"&ngaysinh="+ngaysinh+"&sodt="+sodt+"&email="+email+"&trangthai_nguoidung="+trangthai_nguoidung;
+                                      
+                                        $.ajax({
+                                            data: dataString,
+                                            url: host+"quanly/update_nguoidung.php",
+                                            type:'post',
+                                            dataType:'json',
+                                            success: function(data)
+                                            {    
+                                                if(data.result=="success")
+                                                {
+                                                    alert("Lưu thành công!");
+                                                    window.location.href="quanly_nguoidung.html";
+                                                }
+                                                else
+                                                {
+                                                    if(data.result == "failed")
+                                                    alert("e");
+                                                    else
+                                                        alert("------");
+                                                }
+                                                
+                                            }
+                                            
+                                        });
+                                }
+
+                        }
+                    }
+                }
+            }
+
+        });
+         $("#Xoanguoidung").on("click", function(){
+
+             if (confirm('Nếu người dùng này bị xóa, hệ thống dữ liệu liên quan cũng sẽ mất đi ! Bạn có chắc ? '))
+            {
+                var dataString = "idnguoidung="+idnguoidung;
+                 $.ajax({
+                    data: dataString,
+                    url: host+"quanly/delete_nguoidung.php",
+                    type:'post',
+                    dataType:'json',
+                    success: function(data)
+                    {    
+                        if(data.result=="success")
+                        {
+                            myApp.closePanel();
+                            alert("Xóa thành công!");
+                            window.location.href="quanly_nguoidung.html";
+                        }
+                        else
+                        {
+                            if(data.result == "failed")
+                            alert("e");
+                            else
+                                alert("------");
+                        }
+                        
+                    }
+                    
+                });
+            }
+            else
+            {
+                 myApp.closePanel();
+            }
+            
+         });
+    </script>
+</body>

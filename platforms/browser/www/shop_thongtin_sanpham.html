@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>My App</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" type="text/css" href="css/framework7-icons.css"/>
+	<link rel="stylesheet" type="text/css" href="css/material-icons.css"/>
+  
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+ <div class="panel-overlay"></div>
+    <!-- right panel here -->
+    <div class="panel panel-right panel-cover panel-thongtinsp" id="panel-sanpham">
+       
+        <div class="list-block ">
+            <ul>
+                <li class="item-content" style="" id="Luusanpham">
+                       <span> Lưu sản phẩm</span>      
+                </li>
+                 <li class="item-content " id="Xoasanpham">           
+                       <span>Xóa sản phẩm</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="views">
+        <div class="view view-main">
+            <div data-page="index" class="page navbar-fixed" >
+                    <!-- navbar here -->
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left" style="text-align: center;">
+                            <div style="width: 50px; height: 30px;" id="back-sp">      
+                                <i class="material-icons color-icon size-icon-30"  style=" margin: 0px 5px 0 10px;">arrow_back</i> 
+                            </div>
+                            <span style="font-size: 15px;"> Đăng sản phẩm</span>   
+                        </div>
+                        <div class="right" style="text-align: center;">
+                           <div style="width: 50px; height: 30px;" id='menu-chucnang-thongtinsp'> 
+                            <i class="material-icons color-icon size-icon-30 open-about"  style=" margin: 0px 20px 0 10px;">more_vert</i>
+
+                            </div>
+                        </div>   <!-- navbar-inner -->
+                    </div> 
+                </div>
+                
+                <!-- page content 1 here -->
+                <div class="page-content " style="padding-top: 24px;">
+                        <!-- content -->
+                    <div id="views ">
+                        <form>
+                            <div class="list-block">
+                                <ul class="input-thongtinsp">
+                                    <!-- <li class="item-content thongtinsp-input-img">
+                                        <div class="item-inner">  
+                                            <label class="img-content">
+                                               <img src="img/1.png">
+                                            </label>
+                                            <label class="img-content-add">
+                                                <i class="f7-icons size-icon-30">add</i>
+                                                <input type="file" name="image" capture="camera" accept="image/*"/>
+                                            </label>
+                                           
+                                        </div>  
+                                    </li> -->
+                                    <li id="select-loaisp" class="">                                     
+                                        <a  class="item-link smart-select" data-open-in="picker">
+                                            <div class="item-inner">
+                                            <!-- Select label -->
+                                                 <div class="item-title" id="title-loaisp" style="color: #808080">Loại sản phẩm</div>
+                                            <!-- Selected value, not required -->
+                                                <div class="item-after" id="select-loaisp-value" style="color: #404040;"></div>
+                                            </div>
+                                             <select name="loaisp" id="loaisp">
+                                             <!--    <option value="1" >Trang sức</option>
+                                                <option value="2" >Phụ kiện</option>
+                                                <option value="3" >Đồ chơi</option>
+                                                <option value="4" >Trang phục</option>  -->
+                                            </select>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="item-content" > 
+                                         <div class="item-inner">
+                                                <div class="item-input input-tensp">
+                                                    <input type="text" name="tensp" id="input-tensp" placeholder="Tên sản phẩm">
+                                                </div>
+                                                
+                                            </div>
+                                    </li>
+
+                                    <li class="item-content">
+                                     <div class="item-inner">
+                                            <div class="item-input input-tensp">
+                                              <textarea name="mota" id="input-motasp" placeholder="Mô tả"></textarea>
+                                            </div>           
+                                        </div>
+                                    </li>
+                                     <li class="item-content" >
+                                         <div class="item-inner" >
+                                            <label style="padding-left: 5%">Trạng thái sản phẩm</label>
+                                            <div class="item-title label sanpham-check "></div>
+                                            <label class="label-switch sanpham-check check-trangthaisp">
+                                              <input type="checkbox" id="check-trangthaisp">
+                                              <div class="checkbox"></div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="item-content" id="chitietsp">
+                                        <div class="item-inner ">
+                                                <div class="item-input input-tensp">   
+                                                <input type="text" name="chitietsp" id="input-chitietsp" placeholder="Chi tiết sản phẩm" value="" readonly >
+                                                </div>  
+                                                <div class="item-title">
+                                                    <i class="material-icons " style="color: #ccc;">chevron_right</i>
+                                                </div>
+                                        </div>
+                                    </li>
+                                    <!-- <li class="item-content thongtin-chitietsp">
+                                        <div class="item-inner">  
+                                            <label class="left chitietsp-content-img" >
+                                              <img src="img/1.png">
+                                            </label>
+
+                                             <label class="center chitietsp-content-mausac-chatlieu">
+                                                <div class="chitietsp-content-mausac-chatlieu" >
+                                                    <div class="mausac">
+                                                        <span>Màu sắc:</span>
+                                                        <div class="box-mausac" style="background-color: red;"></div>        
+                                                    </div>
+                                                     <div class="chatlieu ">
+                                                        <span>Chất liệu:</span>
+                                                        <div class="text-chatlieu">Thủy tinh </div>
+                                                    </div>           
+                                                </div>
+                                            </label>
+                                            <label class="right gia">
+                                                <span>200.000đ</span>
+                                            </label>
+                                        </div>                                       
+                                    </li> -->
+                                    <!-- <li class='item-content thongtin-chitietsp'><div class='item-inner'>  <label class='left chitietsp-content-img' ><img src='img/aki.png'></label><label class='center chitietsp-content-mausac-chatlieu'><div class='chitietsp-content-mausac-chatlieu' ><div class='mausac'><span>Màu sắc:</span><div class='box-mausac' style='background-color: #fff;'></div>        </div><div class='chatlieu '><span>Chất liệu:</span><div class='text-chatlieu'>Thủy tinh</div></div></div></label><label class='right gia'><span>200.000đ</span></label></div> </li> -->
+
+                                </ul>   
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="popup popup-chitietsp">
+        <div class="panel-overlay"></div>
+        <!-- right panel here -->
+        <div class="panel panel-right panel-cover panel-thongtinsp panel-chitietsp" id="b">
+           
+            <div class="list-block ">
+                <ul>
+                    <li class="item-content" style="" id="Luumausp">
+                           <span> Lưu mẫu</span>      
+                    </li>
+                     <li class="item-content " id="Xoamausp">           
+                           <span>Xóa mẫu</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+       <div class="view ">
+            <div class="page">
+                <div class="page-content ">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left" style="text-align: center;">
+                                <div style="width: 50px; height: 30px;" id="back-chitietsp">      
+                                    <i class="material-icons color-icon size-icon-30"  style=" margin: 0px 5px 0 10px;">arrow_back</i> 
+                                </div>
+                                <span style="font-size: 15px;"> Chi tiết sản phẩm</span>   
+                            </div>
+                            <div class="right" style="text-align: center;">
+                               <div style="width: 50px; height: 30px;" id='menu-chucnang-chitietsp'> 
+                                <i class="material-icons color-icon size-icon-30 open-about"  style=" margin: 0px 20px 0 10px;">more_vert</i>
+
+                                </div>
+                            </div>   <!-- navbar-inner -->
+                        </div> 
+                    </div>
+                    <div class="page-content  chitietsp-content">
+                        <form enctype="multipart/form-data">
+                            <div class="list-block">
+                                <ul class="input-thongtinsp">
+                                    <li class="item-content thongtinsp-input-img">
+                                        <div class="item-inner">  
+                                            <!-- <label class="img-content">
+                                               <img src="img/1.png">
+                                            </label> -->
+                                        <label class="img-content-add" id="chitietsp-add-image">
+                                            <i class="f7-icons size-icon-30">add</i>
+                                            <input id="add-img" type="file" name="image" capture="camera" accept="image/*" multiple/>
+                                        </label>      
+                                        </div>  
+                                    </li>
+                                    <li class="item-content" > 
+                                         <div class="item-inner">
+                                            <div class="item-input input-tensp">
+                                                <input type="text" name="dongia-mausp" id="input-dongia-mausp" placeholder="Giá sản phẩm : VNĐ">
+
+                                            </div>
+                                            <div class="item-after">VNĐ</div>
+                                                
+                                        </div>
+                                    </li>
+                                     <li class="item-content" > 
+                                         <div class="item-inner">
+                                            <div class="item-input input-tensp">
+                                                <input type="number" name="soluong-mausp" id="soluong-mausp" placeholder="Số lượng">
+                                            </div>
+                                                
+                                        </div>
+                                    </li>
+
+                                    <li class="item-content chitietsp-mausac" id="chitietsp-mausac-title">
+                                        <div class="item-title" style="padding-left: 5%">
+                                            Màu sắc
+                                        </div>
+                                        <div class="item-media" id="icon-title-maussac">
+                                            <i class="material-icons size-icon-30" style="color: #808080; padding: 0px;">
+keyboard_arrow_down</i>
+                                        </div>
+                                    </li>
+                                    <li  class="item-content" id="chitietsp-mausac-content">
+                                        <div class="chitietsp-mausac-content-hienthi" id="chitiet-mausac-content-hienthi">
+                                            <ul class="" id="danhsach-box-mausac">
+                                                 <!-- <div class="div-box-mausac-item color-none-select">
+                                                    <li class=" box-mausac-item color-none-select" id="8" style="  background-color: navy;">
+                                                        
+                                                    </li>
+
+                                                </div> -->
+                                            </ul>
+                                            
+                                        </div>
+                                    </li>
+                                    <li class="item-content chitietsp-chatlieu" id="chitietsp-chatlieu-title">
+                                        <div class="item-title" style="padding-left: 5%">
+                                            Chất liệu
+                                        </div>
+                                        <div class="item-media" id="icon-title-chatlieu">
+                                            <i class="material-icons size-icon-30" style="color: #808080; padding: 0px;">
+keyboard_arrow_down</i>
+                                        </div>
+                                    </li>
+                                    <li class="item-content chitietsp-chatlieu-content" id="chitietsp-chatlieu-content">
+                                        <div class="chitietsp-chatlieu-content-hienthi" id="chitiet-mausac-content-hienthi">
+                                            <ul class="danhsach-chatlieu" id="danhsach-chatlieu">
+                                              <!--Single chekbox item 
+                                                <li class='item-content chatlieu-item' >
+                                                    <label class='label-radio item-content' id='chatlieu-1'> 
+                                                       idchinh la id chat lieu
+                                                        <input type='radio' name='radio-chatlieu'  value='1' >
+                                                        chinh la id cua lable chinh la id chatlieu
+                                                        <div class='item-inner'>
+                                                            <div class='item-media'>
+                                                              <i class='material-icons color-icon-panel'>
+                                                              radio_button_unchecked</i>
+                                                            </div>
+                                                           
+                                                              <div class='item-title'>Gỗ</div>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                             
+                                                <li class="item-content chatlieu-item">
+                                                    <label class="label-radio item-content" id="2">
+                                                        <input type="radio" name="radio-chatlieu"  value="2">
+                                                        <div class="item-inner">
+                                                            <div class="item-media">
+                                                              <i class="material-icons color-icon-panel">radio_button_unchecked</i>
+                                                            </div>
+                                                            
+                                                              <div class="item-title">Giấy</div>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                 <li class="item-content chatlieu-item">
+                                                    <label class="label-radio item-content" id="3">
+                                                        <input type="radio" name="radio-chatlieu"  value="3">
+                                                        <div class="item-inner">
+                                                            <div class="item-media">
+                                                              <i class="material-icons color-icon-panel">radio_button_unchecked</i>
+                                                            </div>
+                                                            
+                                                            <div class="item-title">Cao su</div>
+                                                        </div>
+                                                    </label>
+                                                </li>
+                                                 <li class="item-content chatlieu-item">
+                                                    <label class="label-radio item-content" id="4">
+                                                        <input type="radio" name="radio-chatlieu"  value="4">
+                                                         <div class="item-inner">
+                                                            <div class="item-media">
+                                                              <i class="material-icons color-icon-panel">radio_button_unchecked</i>
+                                                            </div>
+                                                           
+                                                            <div class="item-title">Kim loại</div>
+                                                        </div>
+                                                    </label>
+                                                </li> -->
+                                            </ul>
+                                        </div>   
+                                    </li>
+                                    <li class="item-content">
+                                         <div class="item-inner">
+                                            <label style="padding-left: 5%">Trạng thái mẫu sản phẩm</label>
+                                            <div class="item-title label sanpham-check"></div>
+                                            <label class="label-switch sanpham-check">
+                                              <input type="checkbox" id="check-trangthaimausp">
+                                              <div class="checkbox"></div>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<script>
+       
+   var currentDate = new Date();
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    var today = ( year + "-" + month + "-" + day );
+
+
+        isLogin = GetURLParameter('islogin');
+        uid = GetURLParameter('id');
+        taikhoan= GetURLParameter('taikhoan');
+        idshop = GetURLParameter('idshop');
+        idsp = GetURLParameter('idsp');
+   
+        //load
+        var tensp;
+        var idloaisp;
+        var motasp;
+        var giasp;
+        var idmausac;
+        var idchatlieu;
+        var idmausp;  
+        var trangthaisp;
+        var trangthaimausp;
+        var dataString;
+        //biến truyền csdl
+        var input_tensp="";
+        var input_motasp="";
+        var input_idloaisp="";
+        var input_idchatlieu="";
+        var input_idmausac="";
+        var input_dongiamausp="";
+        var input_soluongmausp="";
+
+         $$("#chitietsp-mausac-content").hide();  //Thẻ chứa bảng chọn màu của popup chi tiết sản phẩm mặc dịnh ẩn
+        $$("#chitietsp-chatlieu-content").hide();  //Thẻ chứa bảng chọn chất liệu của popup chi tiết sản phẩm mặc dịnh ẩn
+        // $$("#select-loaisp-value").hide(); //giá trị hiển thị của loại sp mặc đinh ẩn
+        //load dữ liệu cho select loaisp
+        $.ajax({
+                data: dataString,
+                url: host+"shop/json_loaisp.php",
+                type:'post',
+                dataType:'json',
+
+                success: function(result)
+                {
+                    if(result!="")
+                    {
+                        var i=0;
+                        $.each(result,function(key,field){
+
+                            var tenloaisp = field.tenloaisp;
+                            var  idloaisp = field.idloaisp;
+                            $("#loaisp").append("<option value='"+idloaisp+"'>"+tenloaisp+"</option>");
+                            if(i==0)
+                            {
+                                $("#select-loaisp-value").html(tenloaisp);
+                            }
+                            
+                            i++;
+                        });
+                   }
+                }
+        }); 
+        // load dữ liêu cho modal chi tiétp -  box màu sắc
+        dataString ;
+        $.ajax({
+            data: dataString,
+            url: host+"shop/json_mausac.php",
+            type:'post',
+            dataType:'json',
+
+            success: function(result)
+            {
+                if(result!="")
+                {
+                    $.each(result,function(key,field){
+                        var idmausac = field.idmausac;
+                        var mamausac = field.mamausac;
+                         $$("#danhsach-box-mausac").append("<div class='div-box-mausac-item color-none-select'> <li class='box-mausac-item color-none-select' id='mausac-"+idmausac+"' style='background-color: "+mamausac+";'></li></div>");
+                        
+                    });
+               }
+            }
+        });       
+        //load dữ liệu cho chat lieu 
+        dataString ;
+        $.ajax({
+            data: dataString,
+            url: host+"shop/json_chatlieu.php",
+            type:'post',
+            dataType:'json',
+
+            success: function(result)
+            {
+                if(result!="")
+                {
+                    $.each(result,function(key,field){
+                        var idchatlieu = field.idchatlieu;
+                        var tenchatlieu = field.tenchatlieu;
+                           $$("#danhsach-chatlieu").append(" <li class='item-content chatlieu-item' ><label class='label-radio item-content' id='chatlieu-"+idchatlieu+"'> <input type='radio' name='radio-chatlieu'  value='"+idchatlieu+"' ><div class='item-inner'><div class='item-media'><i class='material-icons color-icon-panel'>radio_button_unchecked</i></div><div class='item-title'>"+tenchatlieu+"</div></div></label></li>");
+                        
+                    });
+               }
+            }
+        });  
+ 
+
+        // Nếu idsp= "" tức là dãn đến từ việc Add sản phẩm sẽ ko gán giá trị có sẵn
+        if(idsp == "") 
+        { 
+            $$("#title-loaisp").show() ;
+            $$("#select-loaisp-value").show();
+
+        }
+        else // Nếu có idsp sẽ select và hiển thị
+        {
+            $$("#title-loaisp").hide() ;
+            //load dữ liệu cho trang thongtinsp
+            dataString = "idsp="+idsp;
+             $.ajax({
+                    data: dataString,
+                    url: host+"shop/json_sanpham_1.php",
+                    type:'post',
+                    dataType:'json',
+
+                    success: function(result)
+                    {
+                        if(result!="")
+                        {
+                            $.each(result,function(key,field){
+                                tensp = field.tensp;
+                                idloaisp = field.idloaisp;
+                                motasp = field.motasp;
+                                giasp = field.giasp;
+                                idmausac = field.idmausac;
+                                idchatlieu = field.idchatlieu;
+                                idmausp = field.idmau_sp;
+                                var trangthaisp_temp = field.trangthaisp;
+                                if(trangthaisp_temp == '0') // nếu sản phẩm bình thường
+                                {
+                                    trangthaisp="true";
+                                }
+                                else //if hết hàng
+                                {
+                                    trangthaisp="";
+                                }
+                                $("#loaisp > option[value='"+idloaisp+"']").attr("selected",true);
+                                $("#select-loaisp-value").html($("#loaisp > option[value='"+idloaisp+"']").text());
+                                $("#input-tensp").val(tensp);
+                                $("#input-motasp").val(motasp);
+                                $("#check-trangthaisp").prop("checked",trangthaisp);
+                             
+
+                            });
+                       }
+                    }
+            });  
+
+            //load du lieu hien thi cho các mẫu sp có sẵn bên dưỡi thẻ chi tiết sản phẩm 
+            dataString = "idsp="+idsp ;
+            $.ajax({
+                data: dataString,
+                url: host+"shop/json_thongtin_mausp.php",
+                type:'post',
+                dataType:'json',
+
+                success: function(result)
+                {
+                    if(result!="")
+                    {
+                        $.each(result,function(key,field){
+                            idmausp = field.idmausp;
+                           var soluongmausp = field.soluongmausp;
+                           var mamau = field.mamau;
+                           var tenchatlieu = field.tenchatlieu;
+                           var dongiamausp = field.dongiasp;
+                           var tenanhsp = field.tenanhsp;
+                           tenanhsp = host_anh+tenanhsp;
+                           // kiểm tra nếu có mẫu sản phẩm có nhiều ảnh thì ẩn bớt đi, chỉ hiện 1
+                           $('.thongtin-chitietsp').each(function() {
+                                var id_cosan = $(this).prop('id');
+                                
+                                if ("mausp-"+idmausp == id_cosan)
+                                {
+                                    $(this).removeAttr('id');
+                                    $(this).hide();
+                                }
+
+                                    
+                            });
+                                                 
+                           $("#chitietsp").after("<li class='item-content thongtin-chitietsp' id='mausp-"+idmausp+"'><div class='item-inner'>  <label class='left chitietsp-content-img' ><img src='"+tenanhsp+"'></label><label class='center chitietsp-content-mausac-chatlieu'><div class='chitietsp-content-mausac-chatlieu' ><div class='mausac'><span>Màu sắc </span><div class='box-mausac' style='background-color: "+mamau+";'></div></div><div class='chatlieu '><span>Chất liệu:</span><div class='text-chatlieu'>"+tenchatlieu+"</div></div></div></label><label class='right gia'><span>"+dongiamausp+" VNĐ</span></label></div> </li>");
+
+                        });
+                   }
+                }
+
+            }); 
+        }
+        
+
+        //Click vào mẫu sản phẩm có sẵn
+        $(document).on('click','.thongtin-chitietsp',function () {
+
+            myApp.popup('.popup-chitietsp');  // Mở modal chi tiết sản phẩm gán gí trị
+            //set lại mặc định cho modal chi tiết san phẩm
+            $(".img-content").remove();
+            $(".box-mausac-item").parent().removeClass("color-selected"); //gỡ item đã colect trước đó
+            
+             $("input[type=radio][name='radio-chatlieu']").removeAttr("checked");
+             
+             $("#chitietsp-image").html("<label class='img-content-add' id='chitietsp-add-image'><i class='f7-icons size-icon-30'>add</i><input type='file' name='image' capture='camera' accept='image/*'/></label>");
+            //chạy ajax lấy dữ liệu          
+            idmausp = (this.id).substr(6);
+            dataString = "idmausp=" + idmausp ;
+            $.ajax({
+                data: dataString,
+                url: host+"shop/json_mauchitietsp_theoidmausp.php",
+                type:'post',
+                dataType:'json',
+
+                success: function(result)
+                {
+                    if(result!="")
+                    {
+                        $.each(result,function(key,field){
+                            var soluongmausp = parseInt(field.soluongmausp);
+                            var idmausac = field.idmausac;
+                            var idchatlieu = field.idchatlieu;
+                            var dongiamausp = parseInt(field.dongiamausp);
+                            var tenanhsp = host_anh+field.tenanhsp;
+
+                            dongiamausp = dongiamausp.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                            var trangthaimausp;
+                            var trangthaimausp_temp = field.trangthaimausp;
+                              if(trangthaimausp_temp == '0') // nếu sản phẩm bình thường
+                                {
+                                    trangthaimausp="true";
+                                }
+                                else //if hết hàng
+                                {
+                                    trangthaimausp="";
+                                }
+                               
+                            $("#input-dongia-mausp").val(dongiamausp);
+                          
+                            $("#soluong-mausp").val(soluongmausp);
+
+                            $("#check-trangthaimausp").prop("checked",trangthaimausp);
+                            //mau sác
+                            idmausac = "#mausac-"+idmausac;
+                            $(idmausac).parent().removeClass("color-selected"); //gỡ item đã colect trước đó
+                            $(idmausac).parent().addClass("color-none-select"); // gán tất cả item đều ko có select
+                            $(idmausac).parent().removeClass("color-none-select");  // gỡ class none select của item được chọn 
+                            $(idmausac).parent().addClass("color-selected"); // gán item được chọn
+
+                            //chất liệu
+                            // alert(idchatlieu);
+                            $("input[type='radio'][value='"+idchatlieu+"']").attr('checked',true);
+
+                            $(".label-radio").children(".item-inner").children(".item-media").html("<i class='material-icons color-icon-panel'>radio_button_unchecked </i>");
+                  
+                            $("label[id='chatlieu-"+idchatlieu+"']").children(".item-inner").children(".item-media").html("<i class='material-icons color-icon-panel'>check_circle </i>");
+                            
+                            // ảnh
+                            $("#chitietsp-add-image").before("<label class='img-content'><img id="+field.tenanhsp+" src='"+tenanhsp+"'></label>")
+                            // $$("#chitietsp-mausac-content").show();  //Thẻ chứa bảng chọn màu của popup chi tiết sản phẩm mặc dịnh ẩn
+                            // $$("#chitietsp-chatlieu-content").show();  //Thẻ chứa bảng chọn chất liệu của popup chi tiết sản phẩm mặc dịnh ẩn
+                            // $$("#select-loaisp-value").hide(); //giá trị hiển thị của loại sp mặc đinh ẩn
+                        });
+                    }
+                }
+            });  
+        });
+
+       
+
+		//panel thong tin sp
+        $$('#menu-chucnang-thongtinsp').on('click',function(e)
+        {
+            myApp.openPanel('right');
+
+        });
+
+        $$('#close').on('click', function(e){
+            myApp.closePanel();
+        });
+        $$('#back-sp').on('click', function(e){
+            window.location.href = "shop_sanpham.html?idshop="+idshop+"&islogin="+isLogin+"&id="+uid+"&taikhoan="+taikhoan;
+        });
+
+         /*loại sản phẩm*/
+         $$('#select-loaisp').on('click', function(e){
+             $$("#title-loaisp").hide() ;
+             $$("#select-loaisp-value").show();
+            
+            // khi mo picker thi thay đổi toolbar
+            $(".smart-select-picker").ready(function(){
+
+                $(".picker-modal").css('height','100%');
+                 $(".toolbar-inner").html("<div class='left'><span style='text-transform:none; padding-left: 16px;'>"+"Loại sản phẩm"+"</span></div> <div class='right'><i class='material-icons color-icon close-picker' style='padding-right: 16px;'>clear </i></div>");
+
+                 });
+
+            }); 
+
+            $$('#loaisp').on('change', function(e){                
+                var a = $$("#loaisp").val();
+                var txt = $("#loaisp option:selected").text();
+                $("#loaisp option").removeAttr("selected");   
+                $("#loaisp > option[value='"+a+"']").attr("selected",true);
+                $("#select-loaisp-value").html($("#loaisp > option[value='"+a+"']").text());
+                $$("#title-loaisp").hide();
+                $$("#select-loaisp-value").show();
+
+                 myApp.closeModal('.picker-modal');     
+            });
+        /*loại sản phẩm*/
+
+        //popup chi tiết sản phẩm
+ 
+        $$('#chitietsp').on('click', function(e){
+           if($("#select-loaisp-value").html()=="" || $("#input-tensp").val()=="" || $("#input-motasp").val()=="")
+           {
+                alert("Nhập đầy đủ dữ liêu cơ bản cho sản phẩm trước !");
+           }
+           else
+           {
+                idmausp = "";
+                myApp.popup('.popup-chitietsp');
+                
+                //set lại mặc định cho modal chi tiết san phẩm
+                 $(".img-content").remove();
+                $("#input-dongia-mausp").val("");
+                $("#soluong-mausp").val("");
+                $(".box-mausac-item").parent().removeClass("color-selected"); //gỡ item đã colect trước đó
+                 $(".box-mausac-item").parent().addClass("color-none-select");
+                $("input[type=radio][name='radio-chatlieu']").removeAttr("checked");
+                $(".label-radio").children(".item-inner").children(".item-media").html("<i class='material-icons color-icon-panel'>radio_button_unchecked </i>");
+                $("#chitietsp-image").html("<label class='img-content-add' id='chitietsp-add-image'><i class='f7-icons size-icon-30'>add</i><input type='file' name='image' capture='camera' accept='image/*'/></label>");
+           }           
+        });
+
+        $$('#back-chitietsp').on('click', function(e){  
+              //xóa hết ảnh  đã chọn
+            if(ten_anh.length>0)
+            {
+                for(var i=0; i< ten_anh.length; i++)
+                {
+                    var tenanh = ten_anh[i];
+                     // alert(dataString);
+                     var dataString = "tenanh="+tenanh;
+                       
+                        $.ajax({
+                                data: dataString,
+                                url: host+"shop/remove_uploaded_image.php",
+                                type:'post',
+                                dataType:'json',
+
+                                complete: function(data)
+                                {
+                                    
+                                },
+
+                        });
+                    
+                }
+            }
+              myApp.closeModal();
+              
+        });
+        
+        //panel  chưc nang chi tiet sanpham
+        $$('#menu-chucnang-chitietsp').on('click',function(e)
+        {
+            myApp.openPanel('right');
+                   
+        });
+      
+       
+
+        /*Màu sắc*/
+        //click màu sắc 
+       var isopen_mausac = false; // = false nếu bảng màu đang ẩn , =true nếu bảng màu đang hiển thị
+       //  <i class="material-icons size-icon-30" style="color: #808080; padding: 0px;">keyboard_arrow_up</i>
+        $$('#chitietsp-mausac-title').on('click', function(e){
+            if(isopen_mausac == false)
+            {
+                $$("#chitietsp-mausac-content").show();
+                $$("#icon-title-maussac").html("<i class='material-icons size-icon-30' style='color: #6699ff; padding: 0px;'>keyboard_arrow_up</i>");
+                isopen_mausac=true;
+            }
+            else
+            {
+                $$("#chitietsp-mausac-content").hide();
+                $$("#icon-title-maussac").html("<i class='material-icons size-icon-30' style='color: #808080; padding: 0px;'>keyboard_arrow_down</i>");
+                isopen_mausac=false;
+            }
+        });
+       
+        //chọn màu sắc
+        $(document).on('click','.box-mausac-item',function () {
+            var getid= $(this).attr('id'); 
+        
+            var id= '#'+getid;
+            var color = $(id).css('background-color');
+            $(".box-mausac-item").parent().removeClass("color-selected"); //gỡ item đã colect trước đó
+            $(".box-mausac-item").parent().addClass("color-none-select"); // gán tất cả item đều ko có select
+            $(id).parent().removeClass("color-none-select");  // gỡ class none select của item được chọn 
+            $(id).parent().addClass("color-selected"); // gán item được chọn     
+        });
+        /*Màu sắc*/
+
+
+        /*chất liệu*/
+        //click chất liệu
+        var isopen_chatlieu = false; // = false nếu bang chất đang ẩn , =true nếu bảng chất liệu đang hiển thị
+
+        $$('#chitietsp-chatlieu-title').on('click', function(e){
+           // alert('s');
+            
+            // $("#loaisp > option[value='"+idloaisp+"']").attr("selected",true);
+             if(isopen_mausac == false)
+            {
+                $$("#chitietsp-chatlieu-content").show();
+                $$("#icon-title-chatlieu").html("<i class='material-icons size-icon-30' style='color: #6699ff; padding: 0px;'>keyboard_arrow_up</i>");
+                isopen_mausac=true;
+            }
+            else
+            {
+                $$("#chitietsp-chatlieu-content").hide();
+                $$("#icon-title-chatlieu").html("<i class='material-icons size-icon-30' style='color: #808080; padding: 0px;'>keyboard_arrow_down</i>");
+                isopen_mausac=false;
+            }
+        });
+         
+         //chon chat lieu
+        $(document).on('change','input[name="radio-chatlieu"]',function () {
+                // var ac=$('[name="ac"]:checked').val();
+                 var id_chatlieu=$("input[type=radio][name='radio-chatlieu']:checked").val(); //lấy value của input được chon
+                 
+                  var id = 'chatlieu-'+id_chatlieu; // set id của lable chứa input radio là value của radio + chatlieu phía trước
+                  var id_cokihieu = '#'+id;
+                 // $("radio[name='radio-chatlieu'][value='"+id_chatlieu+"']").attr("checked",true);
+                $("input[type=radio][name='radio-chatlieu']").removeAttr("checked");
+                  $(this).attr("checked",true);
+                  $(".label-radio").children(".item-inner").children(".item-media").html("<i class='material-icons color-icon-panel'>radio_button_unchecked </i>");
+
+                $("label[id='"+id+"']").children(".item-inner").children(".item-media").html("<i class='material-icons color-icon-panel'>check_circle </i>");        
+         });
+        
+        /*chất liệu*/
+
+
+        var gia_temp ;
+        $("#input-dongia-mausp").on("focus",function(){
+               gia_temp = $(this).val();
+               $('#input-dongia-mausp').attr('type', 'number');
+
+        });
+       
+        $("#input-dongia-mausp").on("blur",function(){       
+               // $('#input-dongia-mausp').attr('type', 'text');   
+        });     
+       
+       // hamm up load anh len sever
+        formData = new FormData();
+     
+        var ten_anh = [];
+        function readURL(input) {
+            
+           
+            if(input.files.length <= 5)
+            {
+
+                for (i=0;i<input.files.length;i++){
+
+                    if (input.files && input.files[i]) {
+
+                        var reader = new FileReader();
+                        formData.append('file',input.files[i]);
+
+                        var j = 0;
+                        reader.onload = function (e) {
+                            // alert(j);
+                            $("#chitietsp-add-image").before("<label class='img-content' id='"+j+"'><img id='"+input.files[j].name+"' src='"+e.target.result+"'></label>");
+                            j++;
+                        };
+                         reader.readAsDataURL(input.files[i]);
+                       
+                        var tAnh = input.files[i].name;
+                        var iD_anh= i;
+                       
+                        // tAnh = tAnh.replace(/\s/g, '');
+                       
+                           
+                         var k = 0;
+                        $.ajax({
+                            url: host+"shop/upload_image.php",
+                            type: "POST",
+                            data: formData,
+                            processData: false,  // tell jQuery not to process the data
+                            contentType: false,
+                            dataType: 'json',
+                                success:function(data)
+                                {
+
+                                    if(data != "")
+                                    {
+                                       
+                                         $.each(data,function(key,field){
+                                           var trangthai =  field.result; // success tontai or loi
+                                            var name =   field.name; // ten ảnh đi cung tình trạng
+                                            if(trangthai == "error")
+                                            {
+                                                alert("File bị lỗi!");
+                                                k++;
+                                            }
+                                            else
+                                                if(trangthai=="tontai")
+                                                {                                            
+                                                    alert("File "+name+"-"+k+" đã được thêm có trước đây. Vui lòng đổi tên hoặc chọn file khác!");
+                                                    $("#"+k).remove();
+                                                    k++;
+                                                    // alert(temp_idAnh);                                            
+                                                }
+                                                else
+                                                    if(trangthai == "success"){
+                                                         ten_anh.push(name);
+                                                        
+                                                        k++;
+                                                    }
+                                                        
+                                                else
+                                                    if(data.result=="loi"){
+                                                        
+                                                          alert("Ảnh "+name+" vượt quá kích cỡ cho phép !");
+                                                          k++;    
+                                                    }
+                                                
+                                         });
+                                    }
+                                    else
+                                    {
+                                        alert("Lỗi");
+                                    }         
+                                },
+                                error: function() {
+                                    alert("Lỗi file");
+                                }
+
+                            });
+                       
+                    }
+                    
+                }
+                // alert(ten_anh);
+            }
+            else
+            {
+                alert("Chỉ được thêm tối đa 5 ảnh cho 1 mẫu !");
+                 $(".img-content").remove();
+            }       
+        }
+        //khi thêm chọn được ảnh
+        $(document).on("change","#add-img",function (e) {
+            readURL(this);
+            
+        });
+      
+        // $(document).on("click",".check-trangthaisp" ,function(){
+        //     // $("#check-trangthaisp").prop('checked','true');
+        //      alert($("#check-trangthaisp").is(':checked'));
+        // });
+
+        $("#Luumausp").on("click",function()
+        {
+           
+            
+            trangthaisp = $("#check-trangthaisp").is(':checked');
+            // alert(idmausp);
+            input_tensp = $("#input-tensp").val();
+            input_motasp = $("#input-motasp").val();
+            input_idloaisp = $$("#loaisp").val();
+            input_dongiamausp = $("#input-dongia-mausp").val();
+            input_soluongmausp= $("#soluong-mausp").val();
+            input_idchatlieu =  $("input[type=radio][name='radio-chatlieu']:checked").val();
+            var idmausac_temp  ="";
+            idmausac_temp = $(".color-selected").children().prop('id');
+            var trangthaisp_temp = $("#check-trangthaisp").is(':checked');
+            var trangthaimausp_temp = $("#check-trangthaimausp").is(':checked');
+            if(trangthaisp_temp==true)
+            {
+               trangthaisp= '0';
+            }
+            else
+            {
+                trangthaisp= '1';
+            }
+             if(trangthaimausp_temp==true)
+            {
+                trangthaimausp= '0';
+            }
+            else
+            {
+                 trangthaimausp= '1';
+            }
+            if(idsp=="") //If ko có id sản phẩm
+            {// alert(idshop + isLogin + uid + taikhoan);
+                if(input_dongiamausp == "" || input_soluongmausp == "" || input_idchatlieu == "" || idmausac_temp=="" || idmausac_temp==null || input_idchatlieu==null)
+                {
+                    alert("nhập đầy đủ dữ liệu!");  
+                }
+                else
+                {
+                    if(input_dongiamausp <= 0 || input_soluongmausp <=0)
+                    {
+                        alert("Đơn giá và số lượng sản phẩm phải lớn hơn 0");
+                    }
+                    else
+                    {
+                         if(ten_anh.length > 0)
+                        {
+                            input_idmausac =idmausac_temp.substr(7);
+                            var dataString = "tensp="+input_tensp+"&motasp="+input_motasp+"&idloaisp="+input_idloaisp+"&idshop="+idshop+"&trangthaisp="+trangthaisp+"&insert=";
+                            //thêm sản phẩm
+                            $.ajax({
+                                data: dataString,
+                                url: host+"shop/insert_sanpham.php",
+                                type:'post',
+                                dataType:'json',
+
+                                success: function(data)
+                                {
+                                    if(data.result=="success") //Thêm sản phẩm thành công
+                                    {
+                                         dataString = "tensp="+input_tensp+"&idshop="+idshop;
+                                        //lấy idsp vừa tạo sản phẩm
+                                        $.ajax({
+                                            data: dataString,
+                                            url: host+"shop/json_select_idsp.php",
+                                            type:'post',
+                                            dataType:'json',
+
+                                            success: function(result)
+                                            {
+                                                if(result!="")
+                                                {
+                                                    $.each(result,function(key,field){
+                                                        idsp = field.idsp;
+                                                        var dataString ="idsp="+idsp+"&idmausac="+input_idmausac+"&idchatlieu="+input_idchatlieu+"&ngaytaomausp="+today+"&soluongmausp="+input_soluongmausp+"&idmausp="+idmausp+"&trangthaimausp="+trangthaimausp;
+                                                        //thêm mẫu sẩn phẩm 
+                                                        $.ajax({
+                                                            data: dataString,
+                                                            url: host+"shop/insert_mausanpham.php",
+                                                            type:'post',
+                                                            dataType:'json',
+
+                                                            success: function(data)
+                                                            {
+                                                                if(data.result=="success")
+                                                                {
+                                                                     dataString = "idsp="+idsp+"&idmausac="+input_idmausac+"&idchatlieu="+input_idchatlieu;
+                                                                     // alert(dataString);
+                                                                    //lấy idmausp vừa insert tào 
+                                                                    $.ajax({
+                                                                        data: dataString,
+                                                                        url: host+"shop/json_select_idmausp.php",
+                                                                        type:'post',
+                                                                        dataType:'json',
+
+                                                                        success: function(result)
+                                                                        {
+                                                                            if(result!="")
+                                                                            {
+                                                                                $.each(result,function(key,field){
+                                                                                    idmausp = field.idmausp;
+                                                                                    dataString = "ngaydieuchinh="+today+"&idmausp="+idmausp+"&dongiamausp="+input_dongiamausp;  
+                                                                                   
+                                                                                    //thêm giá
+                                                                                    $.ajax({
+                                                                                        data: dataString,
+                                                                                        url: host+"shop/insert_cogia.php",
+                                                                                        type:'post',
+                                                                                        dataType:'json',
+
+                                                                                        success: function(data)
+                                                                                        {
+                                                                                            if(data.result=="success")
+                                                                                            {
+                                                                                                //Thêm ảnh
+                                                                                                if(ten_anh.length>0)
+                                                                                                {
+                                                                                                    for(var i=0; i< ten_anh.length; i++)
+                                                                                                    {
+                                                                                                        var tenanh = ten_anh[i];
+                                                                                                        dataString = "idmausp="+idmausp+"&tenanh="+tenanh+"&insert=";
+                                                                                                       
+                                                                                                        $.ajax({
+                                                                                                            data: dataString,
+                                                                                                            url: host+"shop/insert_anh.php",
+                                                                                                            type:'post',
+                                                                                                            dataType:'json',
+
+                                                                                                            success: function(data)
+                                                                                                            {
+
+                                                                                                                if(data.result=="success")
+                                                                                                                {
+                                                                                                                                                                                                                                       
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                    if(data.result=="tontai-anh")
+                                                                                                                        alert("tòn tại ảnh");
+                                                                                                                    else
+                                                                                                                        alert("Lỗi");
+                                                                                                                }
+                                                                                                            }
+                                                                                                        });
+                                                                                                        window.location.href = "shop_sanpham.html?idshop="+idshop+"&islogin="+isLogin+"&id="+uid+"&taikhoan="+taikhoan;    
+                                                                                                    }
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    alert("Chưa chọn ảnh !");
+                                                                                                }
+
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                alert("failed");
+                                                                                            }
+                                                                                        }
+                                                                                    });     
+                                                                                });                                                                                 
+                                                                            }
+                                                                        }
+
+                                                                    });  
+                                                                }
+                                                                   else
+                                                                   {
+                                                                        if(data.result == "failed-insert")
+                                                                            alert("Lỗi insert!");
+                                                                        else
+                                                                        {
+                                                                            if(data.result == "failed-update")
+                                                                                alert("Lỗi update!");
+                                                                            else
+                                                                                alert("failed");
+                                                                        }
+                                                                    }
+                                                                },
+                                                            });       
+                                                        });
+                                                    }
+                                                }
+                                            });        
+                                        }
+                                        else
+                                        {
+                                            if(data.result=="tontai-tensp")
+                                                alert("Tồn tại sản phẩm");
+                                            else
+                                                alert("Thêm thất bại");
+                                        }
+                                    }
+                            });
+                        }
+                        else
+                            alert("Bạn chưa chọn ảnh cho sản phẩm!");
+                    }
+                   
+                   
+                }
+            }
+            else // Nếu có idsp có nghĩa được dãn từ  sản phẩm có sẵn
+            {
+                if(input_dongiamausp == "" || input_soluongmausp == "" || input_idchatlieu == "" || idmausac_temp=="" || idmausac_temp==null || input_idchatlieu==null)
+                {
+                    alert("nhập đầy đủ dữ liệu!");
+               
+                }
+                else
+                {
+                    if(input_dongiamausp <= 0 || input_soluongmausp <=0)
+                    {
+                        alert("Đơn giá và số lượng sản phẩm phải lớn hơn 0");
+                    }
+                    else
+                    {
+                        input_idmausac =idmausac_temp.substr(7);
+                         var dataString ="idsp="+idsp+"&idmausac="+input_idmausac+"&idchatlieu="+input_idchatlieu+"&ngaytaomausp="+today+"&soluongmausp="+input_soluongmausp+"&idmausp="+idmausp+"&trangthaimausp="+trangthaimausp;
+                                  
+                        // alert(dataString);
+                        $.ajax({
+                            data: dataString,
+                            url: host+"shop/insert_mausanpham.php",
+                            type:'post',
+                            dataType:'json',
+
+                            success: function(data)
+                            {
+                                if(data.result=="success")
+                                {
+                                    // alert("Update mẫu sản phẩm thành công!");
+                                    dataString = "idsp="+idsp+"&idmausac="+input_idmausac+"&idchatlieu="+input_idchatlieu;
+                                     // alert(dataString);
+                                    //lấy idmausp vừa insert tào 
+                                    $.ajax({
+                                        data: dataString,
+                                        url: host+"shop/json_select_idmausp.php",
+                                        type:'post',
+                                        dataType:'json',
+
+                                        success: function(result)
+                                        {
+                                            if(result!="")
+                                            {
+                                                $.each(result,function(key,field){
+                                                    idmausp = field.idmausp;
+                                                    dataString = "ngaydieuchinh="+today+"&idmausp="+idmausp+"&dongiamausp="+input_dongiamausp;  
+                                                   // alert(dataString);
+                                                    //thêm giá
+                                                    $.ajax({
+                                                        data: dataString,
+                                                        url: host+"shop/insert_cogia.php",
+                                                        type:'post',
+                                                        dataType:'json',
+
+                                                        success: function(data)
+                                                        {
+                                                            if(data.result=="success")
+                                                            {   
+                                                                //thêm ảnh
+                                                                if(ten_anh.length>0)
+                                                                {
+                                                                    for(var i=0; i< ten_anh.length; i++)
+                                                                    {
+                                                                        var tenanh = ten_anh[i];
+                                                                        dataString = "idmausp="+idmausp+"&tenanh="+tenanh+"&insert=";
+                                                                         // alert(dataString);
+                                                                        $.ajax({
+                                                                            data: dataString,
+                                                                            url: host+"shop/insert_anh.php",
+                                                                            type:'post',
+                                                                            dataType:'json',
+
+                                                                            success: function(data)
+                                                                            {
+
+                                                                                if(data.result=="success")
+                                                                                {
+                                                                                         window.location.href = "shop_sanpham.html?idshop="+idshop+"&islogin="+isLogin+"&id="+uid+"&taikhoan="+taikhoan;                                                       
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    if(data.result=="tontai-anh")
+                                                                                        alert("tòn tại ảnh");
+                                                                                    else
+                                                                                        alert("Lỗi");
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                        // window.location.href = "shop_sanpham.html?idshop="+idshop+"&islogin="+isLogin+"&id="+uid+"&taikhoan="+taikhoan;
+                                                                        
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                window.location.href = "shop_sanpham.html?idshop="+idshop+"&islogin="+isLogin+"&id="+uid+"&taikhoan="+taikhoan;
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            }
+                                        }
+                                    });                                                                     
+                                }
+                               else
+                               {
+                                    if(data.result == "failed-insert")
+                                        alert("Lỗi insert!");
+                                    else
+                                    {
+                                        if(data.result == "failed-update")
+                                            alert("Lỗi update!");
+                                        else
+                                            alert("failed");
+                                    }
+                               }
+                            }
+                        });  
+                    }
+                    
+                }   
+            }  
+           myApp.closePanel();        
+        });
+
+        $("#Luusanpham").on("click",function(){
+            trangthaisp = $("#check-trangthaisp").is(':checked');
+            // alert(idmausp);
+            input_tensp = $("#input-tensp").val();
+            input_motasp = $("#input-motasp").val();
+            input_idloaisp = $$("#loaisp").val();
+            input_dongiamausp = $("#input-dongia-mausp").val();
+            input_soluongmausp= $("#soluong-mausp").val();
+            input_idchatlieu =  $("input[type=radio][name='radio-chatlieu']:checked").val();
+            var idmausac_temp  ="";
+            idmausac_temp = $(".color-selected").children().prop('id');
+            var trangthaisp_temp = $("#check-trangthaisp").is(':checked');
+            var trangthaimausp_temp = $("#check-trangthaimausp").is(':checked');
+            if(trangthaisp_temp==true)
+            {
+               trangthaisp= '0';
+            }
+            else
+            {
+                trangthaisp= '1';
+            }
+             if(trangthaimausp_temp==true)
+            {
+                trangthaimausp= '0';
+            }
+            else
+            {
+                 trangthaimausp= '1';
+            }
+            if(idsp="")
+            {
+                alert("bạn phải tạo 1 mẫu sản phẩm trước khi lưu !");
+            }
+            else
+            {
+                idsp = GetURLParameter("idsp");
+                  var dataString = "tensp="+input_tensp+"&motasp="+input_motasp+"&idloaisp="+input_idloaisp+"&idshop="+idshop+"&trangthaisp="+trangthaisp+"&idsp="+idsp+"&update=";
+               
+                $.ajax({
+                    data: dataString,
+                    url: host+"shop/update_sanpham.php",
+                    type:'post',
+                    dataType:'json',
+
+                    success: function(data)
+                    {
+                        if(data.result=="success") //Thêm sản phẩm thành công
+                        {
+                            alert("update thành công!");
+                            myApp.closePanel();
+                        }
+                    }
+                 
+                });
+            }
+        });
+            
+        $("#Xoamausp").on("click",function(){
+            // alert(idmausp);
+            // alert(idsp);
+            if(idsp=="") // đươc chuyển dến từ add sản phẩm
+            {
+                alert("Bạn chưa lưu mẫu sản phẩm này!");
+            }
+            else    
+            {
+                if(idmausp=="")  // chuyển đến từ nut chi tiết sản phẩm
+                {
+                    alert("bạn phải lưu mẫu sản phẩm này trước khi xóa! hoặc quay trở về nếu không muốn lưu !")
+                }
+                else // chuyên đến từ mẫu sản phẩm có sẵn
+                {
+                    if (confirm('Bạn có chắc sẽ xóa mẫu sản phẩm này ? '))
+                    {
+                        var soMauHienCo;
+                        dataString = "idsp="+idsp;
+                        $.ajax({
+                            data: dataString,
+                            url: host+"shop/count_mausp_conlai.php",
+                            type:'post',
+                            dataType:'json',
+
+                            success: function(result)
+                            {
+                                $.each(result,function(key,field){
+                                    soMauHienCo = field.soMauHienCo;
+                                    if(soMauHienCo=="1")
+                                    {
+                                        if (confirm('Đây là mẫu sản phẩm cuối cùng của sản phảm, nếu xóa sản phẩm này cũng sẽ mất đi ! Bạn có chắc ? '))
+                                        {
+                                             dataString = "idsp="+idsp;
+                                            $.ajax({
+                                                data: dataString,
+                                                url: host+"shop/delete_sanpham.php",
+                                                type:'post',
+                                                dataType:'json',
+
+                                                success: function(data)
+                                                {
+                                                    if(data.result == "success")
+                                                    {
+                                                        dataString = "idmausp="+idmausp;
+                                                        $.ajax({
+                                                            data: dataString,
+                                                            url: host+"shop/delete_mausp.php",
+                                                            type:'post',
+                                                            dataType:'json',
+
+                                                            success: function(data)
+                                                            {
+                                                                if(data.result == "success")
+                                                                {
+                                                                    myApp.closePanel();
+                                                                    
+                                                                     window.location.href ="shop_sanpham.html?idshop="+idshop+"&id="+uid+"&islogin="+isLogin+"&taikhoan="+taikhoan;
+                                                                }
+                                                                else
+                                                                    if(data.result == "failed")
+                                                                        alert("Lỗi delete_mausp");
+                                                                    else
+                                                                        alert("Lỗi");
+                                                            }
+                                                        });
+                                                    }
+                                                    else
+                                                    {
+                                                        if(data.result == "failed")
+                                                            alert("Lỗi delete sản phẩm");
+                                                        else
+                                                            alert("Lỗi");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        else
+                                        {
+                                            myApp.closePanel();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        dataString = "idmausp="+idmausp;
+                                        $.ajax({
+                                            data: dataString,
+                                            url: host+"shop/delete_mausp.php",
+                                            type:'post',
+                                            dataType:'json',
+
+                                            success: function(data)
+                                            {
+                                                if(data.result == "success")
+                                                {
+                                                    myApp.closePanel();
+                                                     window.location.href ="shop_thongtin_sanpham.html?idshop="+idshop+"&id="+uid+"&islogin="+isLogin+"&taikhoan="+taikhoan+"&idsp="+idsp;
+                                                }
+                                                else
+                                                    if(data.result == "failed")
+                                                        alert("Lỗi delete_mausp");
+                                                    else
+                                                        alert("Lỗi");
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                       
+                    }
+                    else
+                    {
+                        myApp.closePanel();
+                    }              
+                }
+            }
+        });
+        
+        $("#Xoasanpham").on("click",function()
+        {
+
+            if(idsp=="") // chuyern từ trang add sản phẩm
+            {
+                alert("bạn cần lưu sản phẩm này trước hoặc quay lại nếu không muốn lưu !")
+            }
+            else
+            {
+                if (confirm('Bạn có chắc sẽ xóa sản phẩm này ? '))
+                {
+                    dataString = "idsp="+idsp;
+                    $.ajax({
+                        data: dataString,
+                        url: host+"shop/delete_sanpham.php",
+                        type:'post',
+                        dataType:'json',
+
+                        success: function(data)
+                        {
+                            if(data.result == "success")
+                            {
+                                dataString = "idsp="+idsp;
+                                 $.ajax({
+                                    data: dataString,
+                                    url: host+"shop/json_idmausp_theosp.php",
+                                    type:'post',
+                                    dataType:'json',
+
+                                    success: function(result)
+                                    {
+                                        if(result!="")
+                                        { 
+                                            $.each(result,function(key,field){
+
+                                                var idmau_sp = field.idmausp;
+                                                dataString = "idmausp="+idmau_sp;
+                                                $.ajax({
+                                                    data: dataString,
+                                                    url: host+"shop/delete_mausp.php",
+                                                    type:'post',
+                                                    dataType:'json',
+
+                                                    success: function(data)
+                                                    {
+                                                        if(data.result == "success")
+                                                        {
+                                                            myApp.closePanel();
+                                                            
+                                                             window.location.href ="shop_sanpham.html?idshop="+idshop+"&id="+uid+"&islogin="+isLogin+"&taikhoan="+taikhoan;
+                                                        }
+                                                        else
+                                                            if(data.result == "failed")
+                                                                alert("Lỗi delete_mausp");
+                                                            else
+                                                                alert("Lỗi");
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    }
+                                });       
+                            }
+                            else
+                            {
+                                if(data.result == "failed")
+                                    alert("Lỗi delete sản phẩm");
+                                else
+                                    alert("Lỗi");
+                            }
+                        }
+                    });
+                }
+                else
+                {
+                    myApp.closePanel();
+                }
+                
+            }
+            
+        });
+       
+        
+        $(document).on("click",".img-content",function (e) 
+        {
+                var imgname;
+                if(idsp=="")
+                {            
+                  
+                    if (confirm('Bạn có chắc loại bỏ ảnh này ?')) {
+                        $(this).remove();
+                         imgname = $(this).children().prop("id");
+                        ten_anh.splice(ten_anh.indexOf(imgname),1);
+                        var dataString = "tenanh="+imgname;
+                       
+                        $.ajax({
+                                data: dataString,
+                                url: host+"shop/remove_uploaded_image.php",
+                                type:'post',
+                                dataType:'json',
+
+                                complete: function(data)
+                                {
+                                    // alert("s");
+                                },
+
+                        });
+                    } 
+                }
+                else 
+                {
+                    
+                    if (confirm('Bạn có chắc loại bỏ ảnh này ?'))
+                    {
+                        $(this).remove();
+                        imgname = $(this).children().prop("id");
+                        var dataString = "tenanh="+imgname;
+                        $.ajax({
+                                data: dataString,
+                                url: host+"shop/remove_uploaded_image.php",
+                                type:'post',
+                                dataType:'json',
+
+                                complete: function(data)
+                                {
+                                    dataString = "idmausp="+idmausp+"&tenanh="+imgname;
+                                    
+                                   $.ajax({
+                                        data: dataString,
+                                        url: host+"shop/delete_anh.php",
+                                        type:'post',
+                                        dataType:'json',
+
+                                        complete: function(data)
+                                        {
+                                           
+                                            // $(this).remove();
+                                        },
+                                    });
+                                },
+                        });
+                    }
+                    
+                }
+                    
+        });
+
+	</script>
+   
+</body>

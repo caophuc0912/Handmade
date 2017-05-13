@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>My App</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" type="text/css" href="css/framework7-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="css/material-icons.css"/>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="panel-overlay"></div>
+    <!-- left panel here -->
+    <div class="panel panel-left panel-cover" id="a">
+        <div class="content-block" style="margin: 0px; padding: 0px;">
+            <!-- content panel here -->
+            <div class="head-slidepanel row ">
+                    <!-- bên trái có chứa img -->
+                    <div class="col-100">
+                        <div class="head-slidepanel-content-left" id="user-info">
+                          <!-- noi dung hien thi thong tin user name tai khoan neu da dang nhap -->
+                           <img src='img/icon/ic_person.png'/>
+                            <br>
+                            <span style="margin-left: 0px; padding: 0px;" id="dangnhap"></span>
+                            <br>
+                           <span style="margin-left: 0px; padding: 0px;" id="taoshop"></span> 
+                        </div>
+                    </div>
+
+                    <!-- bên phải chỉ chứa edit pro5 --> 
+                     <!-- <div class="col-50">
+                        <div class="head-slidepanel-content-right" >
+                            <i class="material-icons color-icon size-icon-25" id="user-edit" style="padding: 10% 0% 0% 70% ; ">mode_edit</i>
+                        </div>
+                    </div> -->
+            </div>
+            <div class="list-block left-panel-menu">
+                <ul id="shop-sanpham-panel-index" >
+                    <li class="item-content">
+                        <div class="item-media"><i class="material-icons size-icon-25 color-icon-panel">home</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Trang chủ</span></div>
+                        </div>
+                    </li>
+                </ul>
+                <ul id="shop-sanpham-panel-donhang">
+                    <li class="item-content">
+                        <div class="item-media"><i class="material-icons size-icon-25 color-icon-panel">content_paste</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Đơn hàng</span></div>
+                        </div>
+                    </li>
+                </ul>
+
+               
+
+                <ul>
+                    <li class="item-content">
+                        <div class="item-media"><i class="material-icons size-icon-25 color-icon-panel ">local_mall</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Sản phẩm</span></div>
+                        </div>
+                    </li>
+                   
+                </ul>
+                <ul>
+                    <li class="item-content" >
+                         <div class="item-media"><i class="material-icons size-icon-25 color-icon-panel ">info</i> </div>
+
+                        <div class="item-inner">
+                            <div class="item-title"><span>Thông tin Shop</span></div>
+                        </div>
+                    </li>
+                </ul>
+                 <ul>
+                    <li class="item-content" >
+                         <div class="item-media"><i class="material-icons size-icon-25 color-icon-panel ">person_pin</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Giới thiệu</span></div>
+                        </div>
+                    </li>
+                </ul>
+                 <ul>
+                    <li class="item-content" >
+                         <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel ">help</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Trợ giúp</span></div>
+                        </div>
+                    </li>
+                </ul>
+                <ul id="shop-sanpham-panel-dangxuat">
+                    <li class="item-content" >
+                         <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel ">exit_to_app</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Đăng xuất</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="views">
+        <div class="view view-main">
+            <div data-page="index"  class="page toolbar-fixed navbar-fixed" >
+                    <!-- navbar here -->
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left" style="text-align: center;">     
+                            <i class="material-icons color-icon size-icon-30" id="menu"  style="margin: 0px 0px 0 10px;">menu</i>
+                           
+                        </div>
+                        <div class="right" style="text-align: center;">
+                            <i class="material-icons color-icon size-icon-30" id="search" style="margin: 1px 5px 0 0;">search</i>
+                            <i class="material-icons color-icon size-icon-35" id='add' style="margin: 0px 20px 0 10px;">add</i>
+                        </div>
+                     </div>   <!-- navbar-inner -->
+                </div> 
+                
+                <!-- toolbar here -->
+                <div class="toolbar sanpham-toolbar"  style="background-color: #f2f2f2; color: #990099;" >
+                    <div class="toolbar-inner" >
+                     <!-- Toolbar links -->
+                     
+                        <div class="left" style=" text-transform: none; padding-left: 5%;" id="sosp">
+                          Số sản phẩm: 100
+                       </div>
+                        
+                        <div class="center" >
+                            |
+                        </div>
+                     
+                     
+                         <div class="right" style=" padding-right: 5%;" id="sanpham-right">
+                           <!-- <div class="item-input"  > -->
+                        
+                               <i class="material-icons size-icon-30" style="vertical-align:-10px; color:#990099;">sort</i>
+                               
+                                <select id="sanpham-sort" style="height: 23px; border: 0px; color: #990099; background-color: #f2f2f2">
+                                         <option>--sắp xếp--</option>
+                                        <option>Tất cả sản phẩm</option>
+                                        <option>Sản phẩm mới</option>
+                                        <option>Theo ngày đăng</option>
+                                </select>
+                            <!-- </div> -->
+                          
+                       
+
+                     </div>
+                       
+                       
+                    </div>
+                </div>  
+                <!-- page content 1 here -->
+                <div class="page-content ">                 
+                    <!-- content -->
+                    <div id="views">
+
+                         <!-- <div class='list-block sanpham-info' id="a">
+                             <div class='left sanpham-info-left'>
+                                 <img src="img/1.png">
+                             </div>
+                            <div class='center sanpham-info-center'>
+                                <span>Giày thu</span> 
+                                <br>
+                                <div class="item-title label sanpham-check"></div>
+                                <label class="label-switch  sanpham-check">
+                                  <input type="checkbox" checked="true" >
+                                  <div class="checkbox"></div>
+                                </label>
+                            </div>
+                            <div class='right sanpham-info-right'>
+                                 <span>Còn:10</span>
+                                  <br>
+                                <p>200.000đ</p>
+                            </div>
+                         </div> -->
+
+                         <!-- <div class="sanpham-info">
+                             <div class="left sanpham-info-left">
+                                 <img src="img/12.jpeg">
+                             </div>
+                            <div class="center sanpham-info-center">
+                                <span>Giày thủ công</span> 
+                                <br>
+                                <div class="item-title label sanpham-check"></div>
+                                <label class="label-switch sanpham-check">
+                                  <input type="checkbox">
+                                  <div class="checkbox"></div>
+                                </label>
+                            </div>
+                            <div class="right sanpham-info-right">
+                                 <span>Còn :1000</span>
+                                  <br>
+                                <p>200.000.000đ</p>
+                            </div>
+                         </div>  -->
+                    </div>
+                </div>
+            </div> <!-- page -->
+        </div> <!-- view-main -->
+    </div>  <!-- views -->
+
+
+
+    <!-- search bar popup -->
+    <div class="popup popup-search">
+         <div class="views">
+            <div class="view view-main">
+                <div data-page="index"  class="page  navbar-fixed" >
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left" id="search-back">
+                               <a ><i class="material-icons color-icon size-icon-30"   style="margin: 5px 0px 0 10px;">arrow_back</i></a>
+                            </div>
+                            <form class="searchbar searchbar-init" id="form-search">
+                                <div class="searchbar-input">
+                                    <input type="search" placeholder="Search" id="input-search">
+                                    <a href="#" class="searchbar-clear"></a>
+                                </div>
+                            </form>
+                            <div class="searchbar-overlay"></div>                              
+                        </div>
+                    </div>
+
+                    <div class="page-content" id="content">
+                        <!-- search bar content here -->
+                        <div class="content-block searchbar-not-found">
+                            <div class="content-block-inner">
+                                Không có sản phẩm phù hợp
+                            </div>
+                        </div>
+                        <div class="list-block list-block-search searchbar-found">
+                            <ul id="list-search">
+                                <!-- <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            Item1
+                                        </div>                                    
+                                    </div>
+                                </li>
+
+                                 <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            Item2
+                                        </div>                                    
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+   
+    //toolbar
+    
+    //KHi click vào sản phẩm hiển thị
+     
+    // 1 Slide Per View, 50px Between
+
+        var mySwiper1 = myApp.swiper('.slide', {
+          pagination:'.slide .swiper-pagination',
+          spaceBetween: 0, speed: 600
+        }); 
+
+        var sosp; 
+            
+        //Load dữ liệu cho view
+        idshop = GetURLParameter('idshop');
+        // $("#loaisp").val('3').prop();
+        var dataString = "idshop="+idshop;
+
+        $.ajax({
+            data: dataString,
+            url: host+"shop/json_sanpham_theoshop.php",
+            type:'post',
+            dataType:'json',
+            success: function(result)
+            {    
+                if(result!="")
+                {  
+                    $.each(result,function(key,field){
+                        
+                        var idsp = field.idsp;
+                        var tensp = field.tensp;
+                        tensp = catChuoi_theododai(tensp,23);
+                        
+                        var tenanhsp = host_anh+field.tenanhsp;
+                        var soluongsp = field.soluongsp;
+                        var trangthaisp = field.trangthaisp; // lấy trang thái sp dạng 0-1-2
+                        var trangthai_sanpham ; // đổi thanh true hoac false
+                        if(trangthaisp == '0') // nếu sản phẩm bình thường
+                        {
+                            trangthai_sanpham="checked";
+                        }
+                        else //if hết hàng
+                        {
+                            trangthai_sanpham="";
+                        }
+                        dataString = "idsp="+idsp;
+                          
+                            $.ajax({
+                                data: dataString,
+                                url: host+"shop/json_anh.php",
+                                type:'post',
+                                dataType:'json',
+
+                                success: function(result)
+                                { 
+                                     if(result!="")
+                                    {
+                                        $.each(result,function(key,field){
+                                            var tenanhsp = field.tenanh;
+                                            tenanhsp = host_anh+tenanhsp;  
+                                             $("#views").append("<div class='sanpham-info' id='"+idsp+"'><div class='left sanpham-info-left'><img src='"+tenanhsp+"'></div><div class='center sanpham-info-center'><span>"+tensp+"</span> <br><div class='item-title label sanpham-check'></div><label class='label-switch  sanpham-check'><input type='checkbox' name='trangthaisp' "+trangthai_sanpham+"><div class='checkbox'></div></label></div><div class='right sanpham-info-right'><span>Còn: "+soluongsp+"</span></div></div>"); 
+                                            // dataString = "idsp="+idsp;
+                                          //   $.ajax({
+                                          //   data: dataString,
+                                          //   url: host+"shop/json_giasp.php",
+                                          //   type:'post',
+                                          //   dataType:'json',
+
+                                          //   success: function(result)
+                                          //   { 
+                                          //        if(result!="")
+                                          //       {
+                                          //           $.each(result,function(key,field){
+                                          //           var giasp = field.giasp;
+                                          //           $('.sanpham-info').each(function() {
+                                          //               var id_cosan = $(this).prop('id');
+                                                        
+                                          //               if (idsp == id_cosan)
+                                          //               {
+                                          //                   $(this).removeAttr('id');
+                                          //                   $(this).hide();
+                                          //               }
+
+                                                            
+                                          //           });
+                                                   
+                                          //           });
+                                          //       }
+                                          //   }
+                                          // });
+                                    });
+                                }
+                            }                     
+                        });
+                    });
+                }
+                   
+                        
+            }
+        });    
+        dataString = "idshop="+idshop;
+                          
+        $.ajax({
+            data: dataString,
+            url: host+"shop/count_sosp_cuashop.php",
+            type:'post',
+            dataType:'json',
+            success: function(result)
+            {    
+                  $.each(result,function(key,field){
+                    var soSp = field.soSp;
+                    $("#sosp").html("Số sản phẩm: "+soSp);
+                  });
+            }
+
+        });
+        //Load dữ liệu cho panel here
+        isLogin = GetURLParameter('islogin');
+        uid = GetURLParameter('id');
+        taikhoan = GetURLParameter('taikhoan');
+        if(isLogin !=null)
+        {   
+            $("#dangnhap").prop("id","tenshop");
+            $("#taoshop").prop("id","taikhoan");
+            //selct lay du lieu cua nguoi dung da dang nhap
+          
+            var dataString="id_nguoidung="+uid;
+
+            $.ajax({
+                    data: dataString,
+                    url: host+"shop/json_shop_thuocnguoidung.php",
+                    type:'post',
+                    dataType:'json',
+
+                    success: function(result)
+                    {
+                        if(result!="")
+                        {
+                           
+                            $.each(result,function(key,field){
+                                var tenshop = field.tenshop;
+                                tenshop = catChuoi_theododai(tenshop,30);
+                                $("#tenshop").html("<span>"+tenshop+"</span>");
+                                $("#taikhoan").html("<span>"+taikhoan+"</span>");
+                                
+                            });
+                       }
+                    }
+            });     
+        }
+        else
+        {
+            $('#tenshop').html("<span> Đăng nhập </span>");
+            $('#dangki').html("<span> Tạo shop </span>");
+        }
+    
+        //panel
+        $$('#menu').on('click',function(e)
+        {
+            myApp.openPanel('left');
+        });
+
+        $$('#close').on('click', function(e){
+            myApp.closePanel();
+        });
+        //search
+        $$('#search').on('click' , function(e){
+            myApp.popup('.popup-search');
+             var dataString = "idshop="+idshop;
+            //hiển thị tab trang chủ mục khuyến mãi
+            $.ajax({
+                data: dataString,
+                url: host+"shop/json_sanpham_theoshop.php",
+                type:'post',
+                dataType:'json',
+
+                success: function(result)
+                {
+                    if(result!="")
+                    {
+                        $.each(result,function(key,field){
+                            
+                            var idsp = field.idsp;
+                            var tensp = field.tensp;
+                            tensp = catChuoi_theododai(tensp,23);
+                             var trangthaisp = field.trangthaisp; // lấy trang thái sp dạng 0-1-2
+                            var trangthai_sanpham ; // đổi thanh true hoac false
+                            if(trangthaisp == '0') // nếu sản phẩm bình thường
+                            {
+                                trangthai_sanpham="Bình thường";
+                            }
+                            else //if hết hàng
+                            {
+                                trangthai_sanpham="Hết hàng";
+                            }
+                             $("#list-search").hide();
+                           $("#list-search").append("<li  class='item-content' id='"+idsp+"'><div class='item-inner'><div class='item-title'>"+tensp+"</div><div class='item-after item-title'>"+trangthai_sanpham+"</div> </div></li>");
+
+                            
+                        });
+                    }
+                }
+            });     
+         });
+
+        $$('#search-back').on('click' , function(){
+            myApp.closeModal();
+        });
+        var mySearchbar = myApp.searchbar('.searchbar', {
+            searchList: '.list-block-search',
+            searchIn: '.item-title',
+            onSearch : function()
+            {
+                if($("#input-search").val()!=""){
+                    $("#list-search").show();
+                }
+                else{
+                    $("#list-search").hide();
+                }
+            }
+
+        }); 
+       // Click thêm mẫu mới
+       $$("#add").on('click', function(){
+            window.location.href = "shop_thongtin_sanpham.html?idshop="+idshop+"&id="+uid+"&islogin="+isLogin+"&taikhoan="+taikhoan+"&idsp=";
+       });
+
+       $$("#shop-sanpham-panel-index").on('click',function(){
+             window.location.href = "index.html?id="+uid+"&islogin="+isLogin+"&taikhoan="+taikhoan;
+       });
+       //click vào sản phẩm có sẵn
+       $(document).on('click','.sanpham-info',function () {
+            var idsp =$(this).prop('id');
+             window.location.href = "shop_thongtin_sanpham.html?idshop="+idshop+"&id="+uid+"&islogin="+isLogin+"&taikhoan="+taikhoan+"&idsp="+idsp;
+       });
+            
+       $$("#shop-sanpham-panel-donhang").on("click",function(){
+            alert("chuyển đến đơn hàng !");
+       });
+       $$("#shop-sanpham-panel-dangxuat").on('click',function(){
+            window.location.href = 'index.html';
+       });
+</script>
+</body>

@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>My App</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
+     -->
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" type="text/css" href="css/framework7-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="css/material-icons.css"/>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="panel-overlay"></div>
+    <!-- left panel here -->
+    <div class="panel panel-left panel-cover" id="a">
+        <div class="content-block" style="margin: 0px; padding: 0px;">
+            <!-- content panel here -->
+            <div class="head-slidepanel row ">
+                    <!-- bên trái có chứa img -->
+                    <div class="col-50">
+                        <div class="head-slidepanel-content-left" id="user-info">
+                          <!-- noi dung hien thi thong tin user name tai khoan neu da dang nhap -->
+                           <img src='img/icon/ic_person.png'/>
+                            
+                            <div id="dangnhap"></div>
+                           <div id="dangki"></div> 
+                        </div>
+                    </div>
+
+                    <!-- bên phải chỉ chứa edit pro5 --> 
+                     <div class="col-50">
+                        <div class="head-slidepanel-content-right" >
+                            <i class="material-icons color-icon size-icon-25" id="user-edit" style="padding: 10% 0% 0% 70% ; ">mode_edit</i>
+                        </div>
+                    </div>
+            </div>
+            <div class="list-block left-panel-menu">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel">home</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Trang chủ</span></div>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li class="item-content" >
+                        <div class="item-media" ><i class="material-icons size-icon-20 color-icon-panel">notifications</i></div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Thông báo</span></div>
+                        </div>
+                    </li>
+                   
+                </ul>
+
+                <ul>
+                    <li class="item-content">
+                        <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel ">view_list</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Danh mục</span></div>
+                        </div>
+                    </li>
+                   
+                </ul>
+                <ul>
+                    <li class="item-content" id="index-panel-shop" >
+                         <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel ">store</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Shop</span></div>
+                        </div>
+                    </li>
+                </ul>
+                 <ul>
+                    <li class="item-content" >
+                         <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel ">person_pin</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Giới thiệu</span></div>
+                        </div>
+                    </li>
+                </ul>
+                 <ul>
+                    <li class="item-content" id="danhmuc">
+                         <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel ">help</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Trợ giúp</span></div>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="item-content" id="dangxuat">
+                         <div class="item-media"><i class="material-icons size-icon-20 color-icon-panel ">exit_to_app</i> </div>
+                        <div class="item-inner">
+                            <div class="item-title"><span>Đăng xuất</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="views">
+        <div class="view view-main">
+            <div data-page="index"  class="page toolbar-fixed navbar-fixed" >
+                    <!-- navbar here -->
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left" >     
+                            <i class="material-icons color-icon size-icon-30" id="menu"  style="margin: 5px 0px 0 10px;">menu</i>
+                                <img src="img/handmade-logo.png" class=" img-logo" style="margin: 5px 0 0 10px;" > 
+                            </div>
+
+                            
+                            <div class="right">    
+                                <a id="search"><i class="material-icons color-icon size-icon-30" style="margin: 5px 10px 0 0;">search</i></a>
+                                <a><i class="material-icons size-icon-20 color-icon size-icon-30  " style=" margin: 5px 10px 0 0;">shopping_cart</i></a>
+                            </div>
+                         </div>   <!-- navbar-inner -->
+                    </div> 
+                    
+                    <!-- toolbar here -->
+                    <div class="toolbar tabbar tabbar-scrollable" >
+                        <div class="toolbar-inner">
+                        <!-- Toolbar links -->
+                            <a class="tab-link active" name="toolbar-tab" id="trangchu" href="#tab-1" >Trang chủ</a>
+                            <a class="tab-link" name="toolbar-tab" id="1" href="#tab-2">Trang sức</a>
+                            <a class="tab-link" name="toolbar-tab" id="3" href="#tab-2">Phụ kiện trang phục</a>
+                            <a class="tab-link" name="toolbar-tab" id="5" href="#tab-2">Đồ chơi trẻ em</a>
+                            <a class="tab-link" name="toolbar-tab" id="7" href="#tab-2">Sản phẩm khác</a>
+                        </div> 
+                    </div>  
+                    <!-- page content 1 here -->
+                    <div class="page-content">
+                    <!-- sideshow here -->
+                    <div class="swiper-container slide">
+                      
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="img/1.png" ></div>
+                            <div class="swiper-slide"><img src="img/2.jpeg" ></div>         
+                        </div>
+                    <!-- content -->
+
+                    </div>
+                        <div id="views">
+                            <div class="content-block-title">Khuyến mãi</div>
+                            <div class="content-block">
+                                <div class="row" id="sanpham-khuyenmai" >
+                                       <!-- Sản phẩm được khuyến mãi -->
+                                       
+                                </div>
+                            </div>
+                             <!-- page content 2 here -->
+                        
+                            <div class="content-block-title">Sản phẩm Mới</div>
+                            <div class="content-block" >
+                                <div class="row" id="sanpham-moi">
+                                        <!--San pham mới --> 
+
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+            </div> <!-- page -->
+        </div> <!-- view-main -->
+    </div>  <!-- views -->
+
+     <!-- login creen here -->
+    <div class="popup login-screen">
+        <div class="view ">
+            <div class="page">
+                <div class="page-content login-screen-content">
+                    <div class="head-login-screen">
+                        <div class="left ">
+                            <i class="material-icons color-icon-black size-icon-25 " id="login-close"  style="padding: 10px 10px 0px 20px;">clear</i>  
+                            <span class="size-title">Login</span>
+                        </div>
+                    </div>
+
+                    <form>
+                        <div class="list-block">
+                            <ul>
+                              <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons size-icon-25 color-icon-panel">person</i></div>
+                                  <div class="item-input">
+                                    <input type="text" name="username" id="login-taikhoan" placeholder="Username" />
+                                  </div>
+                                </div>
+                              </li>
+                           
+                              <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons size-icon-25 color-icon-panel">lock</i></div>
+                                  <div class="item-input">
+                                    <input type="password" name="password" id="login-matkhau" placeholder="Password"/>
+                                  </div>
+                                </div>
+                              </li>
+                                 <li class="item-content div-error" id="login-error" style="padding-top: 25px; display: block; padding-right: 0px; "></li>
+                            </ul>
+                        </div>
+
+                        <div class="list-block" >
+                           
+                                <li class="item-content"> <a href="#" class="button button-big button-login " id="login-btn-dangnhap">Đăng Nhập</a></li>
+                           
+                            </br>
+                              <span style="padding-left: 5%; color:  #9225a7; " id="login-btn-dangki" >Đăng Kí</span>
+                            <div style="margin-top: 15px"></div>
+                            <span style="padding-left: 5%; color:  #9225a7;" id="login-btn-quenmk">Quên mật khẩu</span>
+                        </div>
+                      
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- search pop up here -->
+    <div class="popup popup-search">
+         <div class="views">
+            <div class="view view-main">
+                <div data-page="index"  class="page  navbar-fixed" >
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left" id="search-back">
+                               <a ><i class="material-icons color-icon size-icon-30"   style="margin: 5px 0px 0 10px;">arrow_back</i></a>
+                            </div>
+                            <form class="searchbar searchbar-init" id="form-search">
+                                <div class="searchbar-input">
+                                    <input type="search" placeholder="Search" id="input-search">
+                                    <a href="#" class="searchbar-clear"></a>
+                                </div>
+                            </form>
+                            <div class="searchbar-overlay"></div>                              
+                        </div>
+                    </div>
+
+                    <div class="page-content" id="content">
+                            <!-- search bar content here -->
+                        <div class="content-block searchbar-not-found">
+                            <div class="content-block-inner">
+                                Không có sản phẩm thích hợp
+                            </div>
+                        </div>
+                        <div class="list-block list-block-search searchbar-found">
+                            <ul id="list-search">     <!-- Nội dung list search được định dạng-->
+                                <!-- <li class="item-content">       
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            Item1
+                                        </div>  
+                                        <div class="item-after">
+                                            Shop                                            
+                                        </div>                                  
+                                    </div>
+                                </li>
+
+                                 <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">
+                                            Item2
+                                        </div>                                    
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+   <div class="popup  signup ">
+       <div class="view ">
+            <div class="page">
+                <div class="page-content signup-content">
+                    <div class="head-signup">
+                        <div class="left " >
+                            <i class="material-icons color-icon size-icon-25" id="close-signup"  style="padding: 10px 10px 0px 20px;">clear</i>  
+                            <span class="size-title">Sign up</span>
+                        </div>
+                    </div>
+                    <form >
+                        <div class="list-block">
+                        
+                           <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">receipt</i></div>
+                                  <div class="item-input">
+                                    <input type="text" name="ho" id="signup-input-ho"  placeholder="Họ"/>
+                                  </div>
+                                </div>
+                                  <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">receipt</i></div>
+                                  <div class="item-input">
+                                    <input type="text" name="ten" id="signup-input-ten"  placeholder="Tên"/>
+                                  </div>
+                                </div>
+                            </li>
+                           
+                            <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">today</i></div>
+                                  <div class="item-input">
+                                    <input type="text" id="sigup-input-ngaysinh" name="ngaysinh" value="" placeholder="Ngày sinh" />
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="item-content" >
+                                <div class="item-inner" >
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">location_on</i></div>
+                                  <div class="item-input">
+                                   <input type="text" name="diachi" id="sigup-input-diachi" value="" placeholder="Địa chỉ"/>
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">phone</i></div>
+                                  <div class="item-input">
+                                    <input type="number" name="sodt" id="sigup-input-sodt" value="" placeholder="Số điện thoại"/>
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">email</i></div>
+                                  <div class="item-input">
+                                    <input type="text" name="email" id="sigup-input-email" value="" placeholder="Email"/>
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">person</i></div>
+                                  <div class="item-input">
+                                    <input type="text" name="taikhoan" id="sigup-input-taikhoan" value=""  placeholder="Tài khoản"  />
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">lock</i></div>
+                                  <div class="item-input">
+                                    <input type="password" name="matkhau" id="sigup-input-matkhau" value=""  placeholder="Mật khẩu"/>
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                  <div class="item-title label login-title"><i class="material-icons color-icon-panel">lock</i></div>
+                                  <div class="item-input">
+                                    <input type="password" name="xacnhan-matkhau" id="sigup-input-xacnhan-matkhau" value="" placeholder="Xác nhận mật khẩu"/>
+                                  </div>
+                                </div>
+                            </li>
+                            <li class="item-content div-error" id="sigup-error" style="padding-top: 25px; display: block; padding-right: 0px; "></li>
+                        </div>
+                    
+                        <div class="list-block" >
+                               <li class="item-content">
+                                     <a  class="button button-big button-sigup" id="signup-btn-dangki">Đăng kí</a>
+                                </li>
+                                <br>
+                                <span style="padding-left: 5%;  color:  #9225a7;" id="signup-btn-dangnhap">Đăng nhập</span>
+                                <div style="margin-top: 15px"></div>
+                               
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+   </div>
+   
+
+  
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.0.js"></script>
+    <script>
+    
+
+
+        //load
+
+    $$("#login-error").hide();
+    $$("#sigup-error").hide();
+    // Khi click vào tab bất kì toolbar
+    $('.tab-link').on("click",function(){
+        $('.tab-link').removeClass("active");
+        $(this).addClass("active");
+    });
+    //Load mặc định ở tab trang chủ và load tự load dữ liệu lên
+        var dataString;
+        //hiển thị tab trang chủ mục khuyến mãi
+         $.ajax({
+            data: dataString,
+            url: host+"index/json_sanpham_khuyenmai.php",
+            type:'post',
+            dataType:'json',
+
+            success: function(result)
+            {
+                if(result!="")
+                {
+                    $.each(result,function(key,field){
+                      
+                        var idsp = field.idsp;
+                      
+                        var tensp = field.tensp;
+
+                        tensp = catChuoi_theododai(tensp,23);       
+                        // var giasp = field.giasp;
+                        var tenanhsp = host_anh+field.tenanhsp;
+                       
+                        dataString = "idsp="+idsp;
+                        $.ajax({
+                        data: dataString,
+                        url: host+"shop/json_giasp.php",
+                        type:'post',
+                        dataType:'json',
+
+                        success: function(result)
+                        { 
+                             if(result!="")
+                            {
+                                $.each(result,function(key,field){
+                                var giasp = field.giasp;
+
+                                 $("#sanpham-khuyenmai").append("<div class='col-50' id='"+idsp+"'> <img  src='"+tenanhsp+"'><div class='product-index-info' > <div class='product-name'>"+tensp + "</div> <span><b>"+giasp+" VNĐ</b></span><i class='material-icons size-icon-20 ''> add_shopping_cart </i> </div> ");
+                               
+                                });
+                            }
+                        }
+                      });
+                        
+                    });
+                }
+            }
+        });     
+         var dataString;
+         $.ajax({
+            data: dataString,
+            url: host+"index/json_sanpham_moi.php",
+            type:'post',
+            dataType:'json',
+
+            success: function(result)
+            {
+
+                if(result!="")
+                {
+                  
+                   
+                    $.each(result,function(key,field){
+                      
+                        var idsp = field.idsp;
+                      
+                        var tensp = field.tensp;
+
+                        tensp = catChuoi_theododai(tensp,23);
+                       
+                        var tenanhsp = host_anh+field.tenanhsp;
+                        dataString = "idsp="+idsp;
+                        $.ajax({
+                        data: dataString,
+                        url: host+"shop/json_giasp.php",
+                        type:'post',
+                        dataType:'json',
+
+                        success: function(result)
+                        { 
+                             if(result!="")
+                            {
+                                $.each(result,function(key,field){
+                                var giasp = field.giasp;
+
+                              $("#sanpham-moi").append("<div class='col-50'  id='"+idsp+"'> <img  src='"+tenanhsp+"'><div class='product-index-info'  > <div class='product-name' style='width: auto;'  >"+tensp + "</div > <span ><b>"+giasp+" VNĐ</b></span>   <i class='material-icons size-icon-20 ''> add_shopping_cart </i> </div> ");
+                               
+                                });
+                            }
+                        }
+                      });
+                         
+                    });
+                }
+                
+
+            }
+
+        });     
+
+    // Click tap trang chủ
+    $("#trangchu").on("click",function(){
+       
+    });
+     
+
+
+    //lấy cacs tham số trên URL
+    isLogin = GetURLParameter('islogin');
+    uid = GetURLParameter('id');
+    taikhoan= GetURLParameter('taikhoan');
+    if(isLogin != null)
+    {   
+         $("#dangnhap").prop("id","username");
+         $("#dangki").prop("id","taikhoan");
+            //selct lay du lieu cua nguoi dung da dang nhap
+        var dataString="id="+uid;
+        $.ajax({
+                data: dataString,
+                url: host+"index/json_user_1.php",
+                type:'post',
+                dataType:'json',
+
+                success: function(result)
+                {
+                    if(result!="")
+                    {
+                       
+                        $.each(result,function(key,field){
+                            var ten = field.ten;
+                            var taikhoan = field.taikhoan;
+                            var holot = field.holot;
+                            if(holot.indexOf(" ")== -1)
+                            {
+                                 
+                                 if(holot.length >  10)
+                                 {
+                                    var holot_cat =  holot.substr(0,7)+"...";
+                                    $("#username").html("<span>"+holot_cat+" "+ ten+"</span>");
+                                    $("#taikhoan").html("<span>"+taikhoan+"</span>");
+                                }
+                                else
+                                {
+                                    holot_cat = holot;
+                                      $("#username").html("<span>"+holot_cat+" "+ ten+"</span>");
+                                    $("#taikhoan").html("<span>"+taikhoan+"</span>");
+                                }
+                            }
+                            else
+                            {
+                                 holot_cat = holot.substr(0,holot.indexOf(" ")); //cát bỏ chữ lót chỉ lấy họ là từ đâu tiên
+                                 if(holot_cat.length >  10)
+                                 {
+                                     holot_cat =  holot_cat.substr(0,7)+"...";
+                                    $("#username").html("<span>"+holot_cat+" "+ ten+"</span>");
+                                    $("#taikhoan").html("<span>"+taikhoan+"</span>");
+                                 }
+                                 else
+                                 {
+                                    $("#username").html("<span>"+holot_cat+" "+ ten+"</span>");
+                                    $("#taikhoan").html("<span>"+taikhoan+"</span>");
+                                 }
+                               
+                            } 
+                        });
+                   }
+                }
+        });     
+   
+         $$("#user-edit").on('click', function()
+         {
+            alert('chuyển đến trang edit pro5');
+         }); 
+    }
+    else
+    {
+    $('#dangnhap').html("<span> Đăng nhập </span>");
+    $('#dangki').html("<span> Đăng kí </span>");
+         $$("#user-edit").on('click', function()
+         {
+            myApp.loginScreen();
+         });
+    }
+        
+        var mySwiper1 = myApp.swiper('.slide', {
+      pagination:'.slide .swiper-pagination',
+      spaceBetween: 0, speed: 600
+    });  
+
+    //load du lieu trang index
+    
+    $("a[name='toolbar-tab']").on("click",function(){
+       
+        var idtheloai = $(this).attr('id');
+        var tentheloai = $(this).text();
+        var dataString="idtheloai="+idtheloai;
+        if(idtheloai != "trangchu") // nếu tab click ko phải tab trang chủ thì load theo danh mục
+        {
+
+            $("#views").html("<div class='content-block-title'>"+tentheloai+"</div><div class='content-block'><div class='row' id='sanpham-block'></div></div>");
+                            
+            $.ajax({
+                    data: dataString,
+                    url: host+"index/json_sanpham_theoloai.php",
+                    type:'post',
+                    dataType:'json',
+
+                    success: function(result)
+                    {
+
+                        if(result!="")
+                        {
+                          
+                           
+                            $.each(result,function(key,field){
+                              
+                                var idsp = field.idsp;
+                              
+                                var tensp = field.tensp;
+                                tensp = catChuoi_theododai(tensp,23);
+
+                                // var giasp = field.giasp;
+                                var tenanhsp = host_anh+field.tenanhsp;
+                                dataString = "idsp="+idsp;
+                                 $.ajax({
+                                    data: dataString,
+                                    url: host+"shop/json_giasp.php",
+                                    type:'post',
+                                    dataType:'json',
+
+                                    success: function(result)
+                                    { 
+                                         if(result!="")
+                                        {
+                                            $.each(result,function(key,field){
+                                            var giasp = field.giasp;
+
+                                        $("#sanpham-block").append("<div class='col-50' id='"+idsp+"' > <img  src='"+tenanhsp+"'><div class='product-index-info' > <div class='product-name'>"+tensp + "</div> <span><b>"+giasp+" VNĐ</b></span>   <i class='material-icons size-icon-20 ''> add_shopping_cart </i> </div> ");
+                                           
+                                            });
+                                        }
+                                    }
+                                  });
+                                
+                            });
+                        }
+                        
+
+                    }
+
+            });     
+        }  
+        else // nếu là trang chủ
+        {
+              
+            $("#views").html("<div class='content-block-title'>Khuyến mãi</div><div class='content-block'><div class='row' id='sanpham-khuyenmai'></div></div><div class='content-block-title'>Sản phẩm mới</div><div class='content-block'><div class='row' id='sanpham-moi'></div></div>");
+            var dataString;
+            //hiển thị tab trang chủ mục khuyến mãi
+            $.ajax({
+                data: dataString,
+                url: host+"index/json_sanpham_khuyenmai.php",
+                type:'post',
+                dataType:'json',
+
+                success: function(result)
+                {
+
+                    if(result!="")
+                    {
+                      
+                       
+                        $.each(result,function(key,field){
+                          
+                            var idsp = field.idsp;
+                          
+                            var tensp = field.tensp;
+                            tensp = catChuoi_theododai(tensp,23);
+                            // var giasp = field.giasp;
+                            var tenanhsp = host_anh+field.tenanhsp;
+                            dataString = "idsp="+idsp;
+                            $.ajax({
+                            data: dataString,
+                            url: host+"shop/json_giasp.php",
+                            type:'post',
+                            dataType:'json',
+
+                            success: function(result)
+                            { 
+                                 if(result!="")
+                                {
+                                    $.each(result,function(key,field){
+                                    var giasp = field.giasp;
+
+                                     $("#sanpham-khuyenmai").append("<div class='col-50' id='"+idsp+"'> <img  src='"+tenanhsp+"'><div class='product-index-info' > <div class='product-name'>"+tensp + "</div> <span><b>"+giasp+" VNĐ</b></span><i class='material-icons size-icon-20 ''> add_shopping_cart </i> </div> ");
+                                   
+                                    });
+                                }
+                            }
+                          });
+                        });
+                    }
+                    
+
+                }
+
+            });     
+            var dataString;
+             //hiển thị tab trang chủ mục sản phẩm mới
+            $.ajax({
+                data: dataString,
+                url: host+"index/json_sanpham_moi.php",
+                type:'post',
+                dataType:'json',
+
+                success: function(result)
+                {
+
+                    if(result!="")
+                    {
+                      
+                       
+                        $.each(result,function(key,field){
+                          
+                            var idsp = field.idsp;
+                          
+                            var tensp = field.tensp;
+                              tensp = catChuoi_theododai(tensp,23);
+                            var giasp = field.giasp;
+                            var tenanhsp = host_anh+field.tenanhsp;
+                           dataString = "idsp="+idsp;
+                            $.ajax({
+                            data: dataString,
+                            url: host+"shop/json_giasp.php",
+                            type:'post',
+                            dataType:'json',
+
+                            success: function(result)
+                            { 
+                                 if(result!="")
+                                {
+                                    $.each(result,function(key,field){
+                                    var giasp = field.giasp;
+
+                                  $("#sanpham-moi").append("<div class='col-50'  id='"+idsp+"'> <img  src='"+tenanhsp+"'><div class='product-index-info'  > <div class='product-name' style='width: auto;'  >"+tensp + "</div > <span ><b>"+giasp+" VNĐ</b></span>   <i class='material-icons size-icon-20 ''> add_shopping_cart </i> </div> ");
+                                   
+                                    });
+                                }
+                            }
+                          });
+                        });
+                    }
+                    
+
+                }
+
+            });     
+        }
+         
+    });
+
+
+    // trang chinh index
+    $$('#dangnhap').on('click', function(){
+        myApp.loginScreen();
+        
+    });
+
+   
+    
+    /*Load nội dung trang chủ*/
+
+
+
+    //login
+    
+     $$('#login-close').on('click', function(){
+        myApp.closeModal();
+
+    });
+
+    $$("#login-btn-dangnhap").on('click', function()
+    {
+            // alert("sss");
+             taikhoan=$("#login-taikhoan").val();
+            var matkhau=$("#login-matkhau").val();     
+            var dataString="taikhoan="+taikhoan+"&matkhau="+matkhau+"&login=";           
+            if($.trim(taikhoan).length>0 && $.trim(matkhau).length>0)
+            {
+                $.ajax({
+                    data: dataString,
+                    url: host+"index/login.php",
+                    type:'post',
+                    dataType:'json',
+
+                    success: function(result)
+                    {
+                        if(result!="")
+                        {
+                            $.each(result,function(key,field){
+                                var id_nguoidung=field.id_nguoidung;
+                                var holot = field.holot;
+                                var ten = field.ten;
+                                var trangthai_nguoidung = field.trangthai_nguoidung;
+                                var taikhoan = field.taikhoan;
+
+                                if(trangthai_nguoidung == '1')
+                                {
+                                    $$("#login-error").show();
+                                    $$("#login-error").html("*Rất tiếc ! Tài khoản của bạn đã bị khóa vì lý do nào đó. Vui lòng liên hệ với bộ phận hỗ trợ để biết thêm chi tiết!");
+                                }
+                                else
+                                {
+                                     isLogin = true;
+                                    window.location.href = "index.html?trangthainguoidung="+trangthai_nguoidung+"&id="+id_nguoidung+"&islogin="+isLogin+"&taikhoan="+taikhoan;      
+                                }
+
+                               
+                            });
+                        }
+                        else   
+                        {
+                             $$("#login-error").show();
+                            $$("#login-error").html("*Tài khoản hoặc mật khẩu không đúng!");
+                        }
+                    }
+                });     
+            }   
+            else
+            {
+                $$("#login-error").show();
+
+                $$("#login-error").html("*Nhập đầy đủ tài khoản và mật khẩu");
+                
+            }
+       return false;
+    });
+   
+    //document.getElementById("ngaysinh").valueAsDate = new Date();
+    
+    
+     //sign up
+
+     $$('#dangki').on('click', function(){
+        myApp.popup('.signup');
+     });
+
+     $$('#close-signup').on('click', function(){
+        myApp.closeModal();
+
+    });
+
+    $$("#signup-btn-dangki").on("click",function(){
+        $("#sigup-error").hide();
+        var ho = $("#signup-input-ho").val();
+        var ten= $("#signup-input-ten").val();
+        var ngaysinh = $("#sigup-input-ngaysinh").val();
+        var diachi = $("#sigup-input-diachi").val();
+        var sodt = $("#sigup-input-sodt").val();
+        var email = $("#sigup-input-email").val();
+        var taikhoan = $("#sigup-input-taikhoan").val();
+        var matkhau = $("#sigup-input-matkhau").val();
+        var xacnhanmatkhau = $("#sigup-input-xacnhan-matkhau").val();
+        
+       var dataString="ho="+ho+"&ten="+ten+ "&ngaysinh=" +ngaysinh+ "&diachi="+ diachi +"&sodt="+sodt+"&email="+email+"&taikhoan="+taikhoan+"&matkhau="+matkhau+"&insert=";
+          // alert("data");
+        if(ho.length <= 0 || ten.length <= 0 || ngaysinh.length <=0 || diachi.length <=0 || sodt.length <= 0 || email.length <= 0 || taikhoan.length<=0 || matkhau.length<=0 || xacnhanmatkhau.length <= 0 )
+        {
+
+            $$("#sigup-error").show();
+            $$("#sigup-error").html("*Nhập đầy đủ dữ liệu!");
+        }
+        else
+        {
+            if(checkHoten(ho)==false || checkHoten==false)
+            {
+               
+                 $$("#sigup-error").show();
+                $$("#sigup-error").html("*Họ tên không được có kí tự đặc biệt hoặc số !");
+            }
+            else
+            {
+                if(ho.length > 50 || ten.length > 10)
+                {
+                    $$("#sigup-error").show();
+                    $$("#sigup-error").html("*Họ phải nhỏ hơn 50 kí tự và tên phải nhỏ hơn 10 ksi tự !");
+                }
+                else
+                {
+                    if(sodt.length< 9 || sodt.length > 11 )
+                    {
+                        $$("#sigup-error").show();
+                        $$("#sigup-error").html("*Số điện thoại phải từ 9 - 11 số !");
+                    }
+                    else
+                    {
+                        if(checkTaikhoan(taikhoan) == false || taikhoan.length > 20)
+                        {
+                            $$("#sigup-error").show();
+                            $$("#sigup-error").html("*Tài khoản chỉ được chứ kí tự thường alphab hoặc số và phải ít hơn 20 kí tự!");
+                        }
+                        else
+                        {
+                            if(matkhau.length < 10 && matkhau.length > 8)
+                            {
+                                 $$("#sigup-error").show();
+                                $$("#sigup-error").html("*Mật khẩu phải có ít nhất 8 kí tự và ít hơn 10 kí tự .");
+                            }
+                            else
+                            {
+                                if(checkMatkhau(matkhau)==false )
+                                {
+
+                                    $$("#sigup-error").show();
+                                    $$("#sigup-error").html("*Mật khẩu chỉ được chứa các kí tự Alphab, số và các kí tự đặc biệt !@#$$%^&*_ ");
+                                }
+                                else
+                                {
+                                    if(matkhau != xacnhanmatkhau)
+                                    {
+                                        $$("#sigup-error").show();
+                                        $$("#sigup-error").html("*Mật khẩu đã nhập và mật khẩu xác nhận không trùng khớp!");
+                                    }
+                                    else
+                                    {
+                                        if(checkEmail(email)==false)
+                                        {
+                                             $$("#sigup-error").show();
+                                             $$("#sigup-error").html("*Email không hợp lệ!");
+                                        }
+                                        else
+                                        {
+                                            $.ajax({
+                                                type: "POST",
+                                                url: host+"index/sigup.php",
+                                                data: dataString,
+                                                crossDomain: true,
+                                                cache: false,
+                                              
+                                                success: function(data){
+
+                                                    if(data.result=="success")
+                                                    {   
+                                                        var answer = confirm("Đăng kí thành công!Bạn có muốn trải nghiệm ngay với tài khoản vừa tạo !");
+                                                        if (answer) {
+                                                            myApp.closeModal();
+                                                            myApp.loginScreen();
+                                                        }
+                                                        else 
+                                                        {
+                                                            window.location.href = "index.html";
+                                                        }       
+                                                         
+
+                                                    }
+                                                    else
+                                                    {
+                                                    
+                                                        if(data.result=="tontai-email")
+                                                        {
+                                                            $$("#sigup-error").show();
+                                                            $$("#sigup-error").html("*Email đã được đăng kí!");
+                                                     
+                                                        }
+                                                        else
+                                                        {
+                                                            if(data.result=="tontai-taikhoan")
+                                                            {
+                                                                $$("#sigup-error").show();
+                                                                $$("#sigup-error").html("*Tài khoản đã tồn tại!");
+                                                            }
+                                                            else
+                                                                if(data.result =="failed")
+                                                                    alert("Thất bại!");
+                                                                else
+                                                                    alert("!..........!");
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        }
+                                       
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }   
+            }
+        }      
+    });
+
+
+    $$("#s").on("click",function(){
+        alert("s");
+    });
+    
+     //panel
+    $$('#menu').on('click',function(e)
+    {
+        myApp.openPanel('left');
+    });
+
+    $$('#close').on('click', function(e){
+        myApp.closePanel();
+    });
+
+  //searh
+    $$('#search').on('click' , function(e){
+        myApp.popup('.popup-search');
+        var dataString;
+        //hiển thị tab trang chủ mục khuyến mãi
+         $.ajax({
+            data: dataString,
+            url: host+"index/json_sanpham.php",
+            type:'post',
+            dataType:'json',
+
+            success: function(result)
+            {
+                if(result!="")
+                {
+                    $.each(result,function(key,field){
+                      
+                        var idsp = field.idsp;
+                      
+                        var tensp = field.tensp;
+                        var idshop = field.idshop;
+                        var tenshop = field.tenshop;
+                        $("#list-search").hide();
+                       $("#list-search").append("<li  class='item-content' id='"+idsp+"'><div class='item-inner'><div class='item-title'>"+tensp+"</div> <div class='item-after item-title' id='"+ idshop +"'>"+tenshop+"</div></div>  </div></li>");
+                        
+                    });
+                }
+            }
+        });     
+    });
+
+    $$('#search-back').on('click' , function(){
+            myApp.closeModal();
+    });
+    var mySearchbar = myApp.searchbar('.searchbar', {
+        searchList: '.list-block-search',
+        searchIn: '.item-title',
+        onSearch : function()
+        {
+            if($("#input-search").val()!="")
+                $("#list-search").show();
+            else
+                
+                $("#list-search").hide();
+        }
+    }); 
+
+
+    //index
+  
+
+   
+
+    //shop click
+
+    $$("#index-panel-shop").on('click', function(){
+
+        var dataString = "id_nguoidung="+uid;
+
+        if(isLogin!=null)
+        {
+            $.ajax({
+            data: dataString,
+            url: host+"shop/json_shop_thuocnguoidung.php",
+            type:'post',
+            dataType:'json',
+
+                success: function(result)
+                {
+                    if(result!="")
+                    {
+                        $.each(result,function(key,field){
+                            
+                            var idshop = field.idshop; 
+                            window.location.href = "shop_sanpham.html?idshop="+idshop+"&islogin="+isLogin+"&id="+uid+"&taikhoan="+taikhoan;
+                        });
+                    }
+                    else
+                    {
+                        alert("Bạn chưa đăng kí shop!");
+                    }
+                }
+            });     
+            
+        }
+        
+        else
+        {
+             alert("Bạn chưa đăng nhập !");
+             myApp.loginScreen();
+
+        }
+       
+    });
+    $$("#danhmuc").on('click', function(){
+     
+    });
+     $$("#dangxuat").on('click',function(){
+        window.location.href = "index.html";
+    });
+    var calendarDefault = myApp.calendar({
+    input: '#sigup-input-ngaysinh',
+
+    });
+    
+     
+    // $("#s").on("click",function(){
+    //     alert("a");
+    // }); 
+    //  $(document).on('click','.col-50',function () {
+    //         var a =$(this).prop('id');
+    //             alert(a);
+    // });
+    </script>
+</body>
+
+</html>
